@@ -2,7 +2,7 @@
 allow_bold = true
 bold_is_bright = true
 clickable_url = true
-font = Source Code Pro 11
+font = Source Code Pro Medium 11
 icon_name = terminal
 mouse_autohide = true
 scrollback_lines = 10000
@@ -15,7 +15,6 @@ scrollbar = off
 background = #282828
 foreground = #ebdbb2
 foreground_bold = #ebdbb2
-
 # dark0 + gray
 color0 = #282828
 color8 = #928374
