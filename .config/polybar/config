@@ -1,10 +1,24 @@
 [colors]
-background = #222
-foreground = #eee
-linecolor = #fba922
-bordercolor = #333
-accent = #e60053
-error = #f00
+background-hard = ${xrdb:background-hard}
+background = ${xrdb:background}
+background-soft = ${xrdb:background-soft}
+foreground = ${xrdb:foreground}
+color0 = ${xrdb:color0}
+color1 = ${xrdb:color1}
+color2 = ${xrdb:color2}
+color3 = ${xrdb:color3}
+color4 = ${xrdb:color4}
+color5 = ${xrdb:color5}
+color6 = ${xrdb:color6}
+color7 = ${xrdb:color7}
+color8 = ${xrdb:color8}
+color9 = ${xrdb:color9}
+color10 = ${xrdb:color10}
+color11 = ${xrdb:color11}
+color12 = ${xrdb:color12}
+color13 = ${xrdb:color13}
+color14 = ${xrdb:color14}
+color15 = ${xrdb:color15}
 
 [settings]
 screenchange-reload = true
@@ -25,12 +39,8 @@ fixed-center = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-color = ${colors.linecolor}
-underline-size = 1
-overline-size = 2
-
-border-bottom-size = 2
-border-bottom-color = ${colors.bordercolor}
+border-bottom-size = 1
+border-color = ${colors.color11}
 
 padding-left = 0
 padding-right = 2
@@ -64,27 +74,23 @@ ws-icon-5 = 6;
 ws-icon-default = 
 
 label-mode-padding = 1.5
-label-mode-background = ${colors.accent}
+label-mode-background = ${colors.color1}
 
 label-focused = %icon%
-label-focused-background = #383838
-label-focused-foreground = #fff
-label-focused-underline= ${colors.linecolor}
+label-focused-background = ${colors.background-soft}
+label-focused-foreground = ${colors.foreground}
 label-focused-padding = 2
 
 label-unfocused = %icon%
+label-unfocused-foreground = ${colors.color2}
 label-unfocused-padding = 2
 
 label-urgent = %icon%
-label-urgent-background = #bd2c40
+label-urgent-background = ${colors.color9}
 label-urgent-padding = 2
 
-label-visible = %icon%
-label-visible-underline = #f00
-label-visible-padding = 2
-
 label-separator = |
-label-separator-foreground = ${colors.linecolor}
+label-separator-foreground = ${colors.color3}
 
 [module/storage]
 type = internal/fs
