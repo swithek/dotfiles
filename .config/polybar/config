@@ -43,22 +43,23 @@ border-bottom-size = 1
 border-color = ${colors.color11}
 
 padding-left = 0
-padding-right = 2
+padding-right = 0
 
 module-margin-left = 1
 module-margin-right = 1
+separator = |
 
-font-0 = SourceCodePro:style=Medium:size=11;1
-font-1 = FontAwesome5Free:style=Solid;1
+font-0 = Source Code Pro:style=Medium:size=11;1
+font-1 = Font Awesome 5 Free:style=Solid:size=11;1
 
 tray-position = right
 tray-maxsize = 16
 tray-scale = 1.0
-tray-padding = 4
+tray-padding = 1
 
-modules-left = i3
-modules-center = xwindow
-modules-right = battery storage memory cpu date
+modules-left = i3 cpu memory temperature
+modules-center = title
+modules-right = backlight battery storage date
 
 [module/i3]
 type = internal/i3
@@ -73,49 +74,131 @@ ws-icon-4 = 5;
 ws-icon-5 = 6;
 ws-icon-default = 
 
-label-mode-padding = 1.5
+label-mode-padding = 1
 label-mode-background = ${colors.color1}
 
 label-focused = %icon%
 label-focused-background = ${colors.background-soft}
 label-focused-foreground = ${colors.foreground}
-label-focused-padding = 2
+label-focused-padding = 1
 
 label-unfocused = %icon%
 label-unfocused-foreground = ${colors.color2}
-label-unfocused-padding = 2
+label-unfocused-padding = 1
 
 label-urgent = %icon%
 label-urgent-background = ${colors.color9}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
 label-separator = |
 label-separator-foreground = ${colors.color3}
 
 [module/storage]
 type = internal/fs
-mount-0 = /
 fixed-values = true
-label-mounted =  %free%
+mount-0 = /
+format-mounted-prefix = 
+format-mounted-prefix-foreground = ${colors.color12}
+format-mounted-prefix-margin-right = 1
+label-mounted = %free%
 
 [module/cpu]
 type = internal/cpu
-interval = 2
-label = CPU %percentage%%
+interval = 1
+format = <bar-load>
+; label = 
+
+bar-load-format = %fill%%empty%
+bar-load-gradient = true
+bar-load-width = 10
+bar-load-foreground-0 = ${colors.color12}
+bar-load-foreground-1 = ${colors.color10}
+bar-load-foreground-2 = ${colors.color3}
+bar-load-foreground-3 = ${colors.color11}
+bar-load-foreground-4 = ${colors.color9}
+bar-load-fill = ▐
+bar-load-empty = ▐
+bar-load-empty-foreground = ${colors.color8}
+
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+ramp-coreload-foreground = ${colors.color12}
+ramp-coreload-0-foreground = ${colors.color12}
+ramp-coreload-1-foreground = ${colors.color12}
+ramp-coreload-2-foreground = ${colors.color10}
+ramp-coreload-3-foreground = ${colors.color10}
+ramp-coreload-4-foreground = ${colors.color11}
+ramp-coreload-5-foreground = ${colors.color11}
+ramp-coreload-6-foreground = ${colors.color9}
+ramp-coreload-7-foreground = ${colors.color9}
 
 [module/memory]
 type = internal/memory
 interval = 2
-label = RAM %percentage_used%%
+format = <ramp-used> <label>
+label = %gb_used%
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
+ramp-used-7 = █
+ramp-used-foreground = ${colors.color12}
+ramp-used-0-foreground = ${colors.color12}
+ramp-used-1-foreground = ${colors.color12}
+ramp-used-2-foreground = ${colors.color10}
+ramp-used-3-foreground = ${colors.color10}
+ramp-used-4-foreground = ${colors.color11}
+ramp-used-5-foreground = ${colors.color11}
+ramp-used-6-foreground = ${colors.color9}
+ramp-used-7-foreground = ${colors.color9}
+ramp-used-padding = 0
+
+[module/temperature]
+type=internal/temperature
+interval = 2
+base-temperature = 35
+warn-temperature = 55
+format =<ramp> <label>
+format-warn =<ramp> <label-warn>
+label = %temperature-c%
+label-warn = %temperature-c%
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.color12}
+ramp-0-foreground = ${colors.color12}
+ramp-1-foreground = ${colors.color11}
+ramp-2-foreground = ${colors.color9}
 
 [module/date]
 type = internal/date
-date = %a %b %d
-time = %R
-date-alt = %a %b %d %Y
-time-alt = %T
-label = %date% %time%
 interval = 1
+date = %a, %b %d
+time = %R
+date-alt = %a, %b %d %Y
+time-alt = %T
+label =  %date%  %time%
+
+[module/pulseaudio]
+type = internal/pulseaudio
+format-volume = <ramp-volume> <label-volume>
+format-muted = <label-muted>
+label-volume = %percentage%%
+label-muted =  muted
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-foreground = ${colors.color4}
 
 [module/battery]
 type = internal/battery
@@ -128,7 +211,8 @@ label-charging = %percentage%%
 format-discharging = <ramp-capacity> <label-discharging>
 label-discharging = %percentage%%
 
-format-full = <ramp-capacity>
+format-full = <ramp-capacity> <label-full>
+label-full = Full
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -136,6 +220,11 @@ ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 ramp-capacity-foreground = ${colors.foreground}
+ramp-capacity-0-foreground = ${colors.color9}
+ramp-capacity-1-foreground = ${colors.color11}
+ramp-capacity-2-foreground = ${colors.color10}
+ramp-capacity-3-foreground = ${colors.color10}
+ramp-capacity-4-foreground = ${colors.color12}
 
 animation-charging-0 = ${self.ramp-capacity-0}
 animation-charging-1 = ${self.ramp-capacity-1}
@@ -145,9 +234,27 @@ animation-charging-4 = ${self.ramp-capacity-4}
 animation-charging-foreground = ${colors.foreground}
 animation-charging-framerate = 750
 
-[module/xwindow]
+[module/title]
 type = internal/xwindow
-label-maxlen = 75
+label-maxlen = 60
 label-empty = Empty
+format-padding = 1
+
+[module/backlight]
+type=internal/xbacklight
+enable-scroll = true
+format =<ramp> <label>
+label = %percentage%%
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-foreground = ${colors.color8}
+ramp-0-foreground = ${colors.color8}
+ramp-1-foreground = ${colors.color12}
+ramp-2-foreground = ${colors.color10}
+ramp-3-foreground = ${colors.color3}
+ramp-4-foreground = ${colors.color11}
 
 ; vim:ft=dosini
