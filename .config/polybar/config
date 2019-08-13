@@ -80,15 +80,15 @@ label-mode-background = ${colors.color1}
 label-focused = %icon%
 label-focused-background = ${colors.background-soft}
 label-focused-foreground = ${colors.foreground}
-label-focused-padding = 1
+label-focused-padding = 2
 
 label-unfocused = %icon%
 label-unfocused-foreground = ${colors.color2}
-label-unfocused-padding = 1
+label-unfocused-padding = 2
 
 label-urgent = %icon%
 label-urgent-background = ${colors.color9}
-label-urgent-padding = 1
+label-urgent-padding = 2
 
 label-separator = |
 label-separator-foreground = ${colors.color3}
@@ -109,34 +109,15 @@ format = <bar-load>
 ; label = 
 
 bar-load-format = %fill%%empty%
-bar-load-gradient = true
 bar-load-width = 10
 bar-load-foreground-0 = ${colors.color12}
 bar-load-foreground-1 = ${colors.color10}
 bar-load-foreground-2 = ${colors.color3}
 bar-load-foreground-3 = ${colors.color11}
 bar-load-foreground-4 = ${colors.color9}
-bar-load-fill = ▐
-bar-load-empty = ▐
+bar-load-fill = 
+bar-load-empty = 
 bar-load-empty-foreground = ${colors.color8}
-
-ramp-coreload-0 = ▁
-ramp-coreload-1 = ▂
-ramp-coreload-2 = ▃
-ramp-coreload-3 = ▄
-ramp-coreload-4 = ▅
-ramp-coreload-5 = ▆
-ramp-coreload-6 = ▇
-ramp-coreload-7 = █
-ramp-coreload-foreground = ${colors.color12}
-ramp-coreload-0-foreground = ${colors.color12}
-ramp-coreload-1-foreground = ${colors.color12}
-ramp-coreload-2-foreground = ${colors.color10}
-ramp-coreload-3-foreground = ${colors.color10}
-ramp-coreload-4-foreground = ${colors.color11}
-ramp-coreload-5-foreground = ${colors.color11}
-ramp-coreload-6-foreground = ${colors.color9}
-ramp-coreload-7-foreground = ${colors.color9}
 
 [module/memory]
 type = internal/memory
