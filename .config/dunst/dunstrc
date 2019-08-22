@@ -1,55 +1,55 @@
 [global]
-    font = Source Code Pro 11
-    markup = yes
-    format = "<b>%s</b>\n%b"
-    sort = yes
-    indicate_hidden = yes
-    alignment = left
-    bounce_freq = 0
-    show_age_threshold = -1
-    # geometry.
-    word_wrap = yes
-    ignore_newline = no
-    geometry = "300x50-20+20"
-    shrink = no
-    transparency = 5
-    idle_threshold = 120 
-    monitor = 0
-    follow = keyboard
-    sticky_history = yes
-    history_length = 15
-    show_indicators = no
-    line_height = 0
-    separator_height = 2
-    padding = 6
-    horizontal_padding = 6
-    separator_color = frame
-    startup_notification = false
-    icon_position = left
-    max_icon_size = 128
-    icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/
+font = Source Code Pro 11
+markup = yes
+format = "<b>%s</b>\n%b\n%p"
+sort = yes
+indicate_hidden = yes
+alignment = center
+bounce_freq = 0
+show_age_threshold = -1
+# geometry.
+word_wrap = yes
+ignore_newline = no
+geometry = "300x50-20+40"
+shrink = no
+transparency = 5
+idle_threshold = 120 
+monitor = 0
+follow = keyboard
+sticky_history = yes
+history_length = 15
+show_indicators = no
+line_height = 0
+separator_height = 2
+padding = 6
+horizontal_padding = 6
+separator_color = frame
+startup_notification = false
+icon_position = left
+max_icon_size = 128
+icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/
 
 [frame]
-    width = 1
-    color = "#98971a"
+width = 1
+color = "#98971a"
 
 [shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    history = ctrl+grave
-    context = ctrl+shift+period
+close = ctrl+space
+close_all = ctrl+shift+space
+history = ctrl+grave
+context = ctrl+shift+period
 
 [urgency_low]
-    background = "#282828"
-    foreground = "#ebdbb2"
-    timeout = 2
+background = "#282828"
+foreground = "#ebdbb2"
+timeout = 2
 
 [urgency_normal]
-    background = "#282828"
-    foreground = "#ebdbb2"
-    timeout = 2
+background = "#282828"
+foreground = "#ebdbb2"
+timeout = 2
 
 [urgency_critical]
-    background = "#282828"
-    foreground = "#ebdbb2"
-    timeout = 0
+background = "#282828"
+foreground = "#ebdbb2"
+timeout = 0
