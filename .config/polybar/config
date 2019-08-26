@@ -57,9 +57,9 @@ tray-maxsize = 16
 tray-scale = 1.0
 tray-padding = 1
 
-modules-left = i3 cpu memory temperature
+modules-left = i3 cpu memory storage
 modules-center = title
-modules-right = backlight battery storage date
+modules-right = vpn backlight temperature battery date
 
 [module/i3]
 type = internal/i3
@@ -112,8 +112,8 @@ bar-load-format = %fill%%empty%
 bar-load-width = 10
 bar-load-foreground-0 = ${colors.color12}
 bar-load-foreground-1 = ${colors.color10}
-bar-load-foreground-2 = ${colors.color3}
-bar-load-foreground-3 = ${colors.color11}
+bar-load-foreground-2 = ${colors.color11}
+bar-load-foreground-3 = ${colors.color3}
 bar-load-foreground-4 = ${colors.color9}
 bar-load-fill = 
 bar-load-empty = 
@@ -217,7 +217,7 @@ animation-charging-framerate = 750
 
 [module/title]
 type = internal/xwindow
-label-maxlen = 60
+label-maxlen = 30
 label-empty = Empty
 format-padding = 1
 
@@ -237,5 +237,10 @@ ramp-1-foreground = ${colors.color12}
 ramp-2-foreground = ${colors.color10}
 ramp-3-foreground = ${colors.color3}
 ramp-4-foreground = ${colors.color11}
+
+[module/vpn]
+type = custom/script
+exec = ~/.config/polybar/scripts/vpn.sh
+interval = 5
 
 ; vim:ft=dosini
