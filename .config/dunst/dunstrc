@@ -7,10 +7,9 @@ indicate_hidden = yes
 alignment = center
 bounce_freq = 0
 show_age_threshold = -1
-# geometry.
 word_wrap = yes
 ignore_newline = no
-geometry = "300x50-20+40"
+geometry = "300x50-8+40"
 shrink = no
 transparency = 5
 idle_threshold = 120 

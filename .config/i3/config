@@ -46,7 +46,8 @@ set_from_resource $term_color15    color15
 
 # Custom commands
 set $assign $HOME/.config/i3/scripts/assign.sh
-set $locker betterlockscreen -l dimblur
+set $locker betterlockscreen -l dimblur -t "The end is near."
+set $locker_suspend betterlockscreen -s dimblur -t "The end is near."
 set $screenshot cd $HOME/Pictures && scrot
 
 ######################
@@ -85,12 +86,13 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id xautolock -time 10 -locker $locker
-exec_always --no-startup-id betterlockscreen -u $HOME/.config/wallpapers/forest.png
-exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/forest.png
-exec_always --no-startup-id compton -b
+exec --no-startup-id udiskie -AntF2
+exec --no-startup-id compton -b
+exec --no-startup-id betterlockscreen -u $HOME/.config/wallpapers/forest.png
+exec --no-startup-id feh --bg-fill $HOME/.config/wallpapers/forest.png
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/scripts/launch.sh
 
 ##################
 ## Key bindings ##
@@ -200,10 +202,13 @@ bindsym $mod+Shift+Print --release exec --no-startup-id $screenshot -s && sleep 
 	notify-send "Selected window screenshot was saved in ~/Pictures"
 
 # Open file manager.
-bindsym $mod+g exec $term -e ranger
+bindsym $mod+g exec $term -e ranger --name=ranger
 
 # Start rofi.
 bindsym $mod+d exec --no-startup-id rofi -show run
+
+# Open WeeChat.
+bindsym $mod+c  exec $term -e weechat --name=weechat
 
 # Activate window assign mode.
 bindsym $mod+grave mode "assign"
@@ -242,8 +247,8 @@ mode "assign" {
 set $mode_system (l)ock, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
 	bindsym l exec --no-startup-id exec $locker, mode "default"
-	bindsym s exec --no-startup-id exec $locker && systemctl suspend, mode "default"
-	bindsym h exec --no-startup-id exec $locker && systemctl hibernate, mode "default"
+	bindsym s exec --no-startup-id exec $locker_suspend, mode "default"
+	bindsym h exec --no-startup-id exec systemctl hibernate, mode "default"
 	bindsym r exec --no-startup-id systemctl reboot, mode "default"
 	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
@@ -275,14 +280,15 @@ mode "resize" {
 ## Window management ##
 #######################
 
-assign [class="firefoxdeveloperedition"] $ws3
-assign [class="Chromium"] $ws3
-assign [class="Termite"] $ws1
-assign [class="FreeTube"] $ws4
-assign [class="Signal"] $ws2
-assign [class="Audacious"] $ws4
-assign [class="vlc"] $ws5
-assign [class="Pychess"] $ws6
+assign [class="Termite" instance="weechat"] $ws2
+assign [class="Pychess" instance="pychess"] $ws6
+assign [class="vlc" instance="vlc"] $ws5
+assign [class="Audacious" instance="audacious"] $ws4
+assign [class="Signal" instance="signal"] $ws2
+assign [class="FreeTube" instance="freetube"] $ws4
+assign [class="Chromium" instance="chromium"] $ws3
+assign [class="firefoxdeveloperedition" instance="Navigator"] $ws3
+assign [class="Termite" instance="termite"] $ws1
 
 ##################
 ## Theme colors ##
