@@ -208,7 +208,13 @@ bindsym $mod+g exec $term -e ranger --name=ranger
 bindsym $mod+d exec --no-startup-id rofi -show run
 
 # Open WeeChat.
-bindsym $mod+c  exec $term -e weechat --name=weechat
+bindsym $mod+c exec $term -e weechat --name=weechat
+
+# Open cmus.
+bindsym $mod+m exec $term -e cmus --name=cmus
+
+# Toggle music player.
+bindsym $mod+z exec cmus-remote -u
 
 # Activate window assign mode.
 bindsym $mod+grave mode "assign"
@@ -280,6 +286,8 @@ mode "resize" {
 ## Window management ##
 #######################
 
+assign [class="TelegramDesktop" instance="telegram-desktop"] $ws2
+assign [class="Termite" instance="cmus"] $ws4
 assign [class="Termite" instance="weechat"] $ws2
 assign [class="Pychess" instance="pychess"] $ws6
 assign [class="vlc" instance="vlc"] $ws5
