@@ -1,65 +1,153 @@
-" ---------------------------------
-" Installing and activating plugins
-" ---------------------------------
+""""""""""""""""""""""""""""""""""""""""
+"
+" => General
+"
+""""""""""""""""""""""""""""""""""""""""
 
-" install vim-plug, if needed
+" Define a leader key.
+let mapleader = ","
+
+" Make Vim behave in a more useful way (non Vi-compatible).
+set nocompatible
+
+" Set how many lines of history Vim has to remember.
+set history=500
+
+" Load plugins by filetype.
+filetype plugin indent on
+
+" Auto read when a file is changed from the outside.
+set autoread
+
+" Auto write when a file being built (:make).
+set autowrite
+
+" Hide mode status info.
+set noshowmode
+
+""""""""""""""""""""""""""""""""""""""""
+"
+" => Plugins
+"
+""""""""""""""""""""""""""""""""""""""""
+
+" Install vim-plug, if needed.
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" plugins managed by vim-plug
 call plug#begin('~/.vim/plugged')
 
-" Autoloaded plugins
-Plug 'morhetz/gruvbox'
-Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/nerdcommenter'
-Plug 'itchyny/vim-gitbranch'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Update / install Vim plugins.
+nnoremap <leader>` :PlugUpdate<cr>
 
-" On-demand plugins
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+""""""""""""""""""""""""""""""""""""""
+" => General purpose plugins
+""""""""""""""""""""""""""""""""""""""
+Plug 'tpope/vim-fugitive'
+Plug 'mbbill/undotree'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } 
+Plug 'vim-airline/vim-airline'
+Plug 'junegunn/goyo.vim' 
+Plug 'junegunn/limelight.vim' 
+Plug 'morhetz/gruvbox'
+
+""""""""""""""""""""""""""""""""""""""
+" => Development plugins
+""""""""""""""""""""""""""""""""""""""
+Plug 'scrooloose/nerdcommenter'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+
+""""""""""""""""""""""""""""""""""""""
+" => Writing (prose, etc.) plugins
+""""""""""""""""""""""""""""""""""""""
+Plug 'reedes/vim-pencil', { 'for': ['markdown', 'text']}
+Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'text']}
+Plug 'reedes/vim-textobj-quote', { 'for': ['markdown', 'text']}
+Plug 'reedes/vim-litecorrect', { 'for': ['markdown', 'text']}
+Plug 'reedes/vim-lexical', { 'for': ['markdown', 'text']}
+Plug 'reedes/vim-wordy', { 'for': ['markdown', 'text']}
+Plug 'dbmrq/vim-ditto', { 'for': ['markdown', 'text']}
 
 call plug#end()
 
-" ---------------
-" Plugin settings
-" ---------------
+""""""""""""""""""""""""""""""""""""""
+" => Undotree
+""""""""""""""""""""""""""""""""""""""
 
-" lightline settings:
+" Open / close undo tree view.
+nnoremap <leader>u :UndotreeToggle<cr>
 
-" Specify lightline look
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'gitbranch#name'
-      \ },
-      \ }
+""""""""""""""""""""""""""""""""""""""
+" => NERDTree
+""""""""""""""""""""""""""""""""""""""
 
-" vim-go settings:
+" Open file manager on enter.
+autocmd VimEnter * NERDTree
 
-" Run goimports when using gofmt
+" Open / close file manager.
+nnoremap <leader>o :NERDTreeToggle<cr>
+
+""""""""""""""""""""""""""""""""""""""
+" => vim-airline
+""""""""""""""""""""""""""""""""""""""
+
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline_section_b = airline#section#create(['%f'])
+let g:airline_section_c = airline#section#create(['branch'])
+
+""""""""""""""""""""""""""""""""""""""
+" Goyo
+""""""""""""""""""""""""""""""""""""""
+
+" Toggle focus mode.
+nnoremap <silent> <leader>z :Goyo<cr>
+
+""""""""""""""""""""""""""""""""""""""
+" => limelight
+""""""""""""""""""""""""""""""""""""""
+
+" Set inactive text color.
+let g:limelight_conceal_ctermfg = '254'
+
+" Toggle limelight status.
+nnoremap <silent> <leader>x :Limelight!!<cr>
+
+""""""""""""""""""""""""""""""""""""""
+" => vim-go
+""""""""""""""""""""""""""""""""""""""
+
+" Run goimports when using gofmt.
 let g:go_fmt_command = "goimports"
 
-" Get signature / type info under the cursor
+" Get signature / type info under the cursor.
 let g:go_auto_type_info = 1
 
-" Show the name of each failed test
+" Show the name of each failed test.
 let g:go_test_show_name = 1
 
-" Specifiy tool for signature / type fetching
+" Specifiy a tool for signature / type fetching.
 let g:go_info_mode = 'gopls'
 
-" Automatically highlight all uses of the indentifier
+" Automatically highlight all uses of the indentifier.
 let g:go_auto_sameids = 1
 
-" Various syntax highlighting 
+" Various syntax objects highlighting.
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_function_calls = 1
@@ -67,145 +155,253 @@ let g:go_highlight_function_parameters = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
 
-" ----------------
-" Editor settings
-" ----------------
+augroup gobindings
+	autocmd! gobindings
 
-" Set what method should be used when inserting folding marks
-set foldmethod=syntax
+	" Generate error checks.
+	autocmd FileType go nmap <buffer> <leader>er <Plug>(go-iferr)
 
-" Make Vim behave in a more useful way (non Vi-compatible) 
-set nocompatible
+	" Add tags to a struct.
+	autocmd FileType go nnoremap <buffer> <leader>tg :GoAddTags<cr>
 
-" Set the character encoding used inside Vim
-set encoding=utf-8
+	" Run all package tests.
+	autocmd FileType go nmap <buffer> <leader>t <Plug>(go-test)
 
-" Always show status-line
+	" Run only the test that is under the cursor.
+	autocmd FileType go nmap <buffer> <leader>tf <Plug>(go-test-func)
+
+	" Toggle code coverage.
+	autocmd FileType go nmap <buffer> <leader>k <Plug>(go-coverage-toggle)
+augroup end
+
+""""""""""""""""""""""""""""""""""""""
+" => vim-lexical
+""""""""""""""""""""""""""""""""""""""
+
+let g:lexical#spelllang = ['en_gb']
+
+""""""""""""""""""""""""""""""""""""""""
+"
+" => Custom modes
+"
+""""""""""""""""""""""""""""""""""""""""
+
+" Call Prose() to activate prose-specific settings for the active buffer.
+fun! Prose()
+	setl textwidth=74
+	call pencil#init()
+	call textobj#quote#init()
+	call litecorrect#init()
+	call lexical#init()
+
+	" Format paragraph under the cursor.
+	nnoremap <buffer> <silent> Q gqap
+
+	" Visually select the whole paragraph under the cursor.
+	vnoremap <buffer> <silent> Q ap
+
+	" Format visually selected text.
+	vnoremap <buffer> <silent> QQ gq
+
+	" Format all paragraphs in active buffer.
+	nnoremap <buffer> <silent> <leader>Q ggVGgq
+
+	" Surround with double curly quotes.
+	nmap <buffer> <silent> Sq <Plug>SurroundWithDouble
+	vmap <buffer> <silent> Sq <Plug>SurroundWithDouble
+
+	" Surround with single curly quotes.
+	nmap <buffer> <silent> SQ <Plug>SurroundWithSingle
+	vmap <buffer> <silent> SQ <Plug>SurroundWithSingle
+
+	" Replace straight quotes with curly.
+	nmap <buffer> <silent> <leader>qc <Plug>ReplaceWithCurly
+	vmap <buffer> <silent> <leader>qc <Plug>ReplaceWithCurly
+
+	" Replace curly quotes with straight.
+	nmap <buffer> <silent> <leader>qs <Plug>ReplaceWithStraight
+	vmap <buffer> <silent> <leader>qs <Plug>ReplaceWithStraight
+
+	" Cycle through Wordy's categories.
+	nnoremap <buffer> <silent> <leader>wo :NextWordy<cr>
+
+	" Discble Wordy.
+	nnoremap <buffer> <silent> <leader>wO :NoWordy<cr>
+
+	" Toggle Ditto state.
+	nmap <buffer> <silent> <leader>di <Plug>ToggleDitto
+endf
+
+" Activate Prose mode automatically.
+autocmd FileType markdown,text call Prose()
+
+" Activate Prose mode manually.
+command! -nargs=0 Prose call Prose()
+
+""""""""""""""""""""""""""""""""""""""""
+"
+" => Vim user interface
+"
+""""""""""""""""""""""""""""""""""""""""
+
+" Always show status-line.
 set laststatus=2
 
-" Auto read when a file is changed from the outside
-set autoread
+" Set proper formatting.
+set formatoptions-=t
 
-" Auto write when a file being built (:make)
-set autowrite
+" Set what method should be used when inserting folding marks.
+set foldmethod=syntax
 
-" Show line numbers
+" Show line numbers.
 set number
 
-" Highlight search results
-set hlsearch
-
-" While typing a search command, show where the pattern, as it was typed
-" so far, matches
-set incsearch
-
-" Show matching brackets when text indicator is over them
-set showmatch
-
-" Show possible options when typing in command-line and pressing TAB
-set wildmenu
-
-" Width of the TAB character
+" Width of the TAB character.
 set tabstop=8
 
-" Display TAB as characters
+" Display TAB as characters.
 set list 
 set listchars=tab:>·
 
-" Highlight the screen line of the cursor
+" Show possible options when typing in command-line and pressing TAB.
+set wildmenu
+
+" Extend regular expressions.
+set magic
+
+" Highlight the screen line of the cursor.
 set cursorline
 
-" Show the recommended length of line
-set colorcolumn=100
+" Show the recommended length of line.
+set colorcolumn=80
 
-" Don not wrap the lines
+" Do not wrap the lines.
 set nowrap
 
-" Minimal number of screen lines to keep above and below the cursor
+" Minimal number of screen lines to keep above and below the cursor.
 set scrolloff=15
 
-" Set searches to be case-insensitive
+" Highlight search results.
+set hlsearch
+
+" While typing a search command, show where the pattern, as it was typed
+" so far, matches.
+set incsearch
+
+" Show matching brackets when text indicator is over them.
+set showmatch
+
+" Set searches to be case-insensitive.
 set ignorecase
 
 " Override the 'ignorecase' option if the search pattern contains upper
-" case characters
+" case characters.
 set smartcase
 
-" Apply global substitutions on lines
+" Apply global substitutions on lines.
 set gdefault
 
-" Enable syntax highlighting
+" Set the character encoding used inside Vim.
+set encoding=utf-8
+
+" Enable syntax highlighting.
 syntax enable
 
-" Setting dark mode
-set background=dark
+" Call LightsOut to activate dark theme settings.
+fun! LightsOut()
+	colorscheme gruvbox
+	set background=dark 
+	let g:gruvbox_contrast_dark='hard'
+	let g:limelight_conceal_ctermfg = '236'
+	:AirlineRefresh
+endf
 
-" Setup colorsheme
-colorscheme gruvbox
+" Activate dark theme manually.
+command! -nargs=0 LightsOut call LightsOut()
 
-" Open file manager on enter
-autocmd VimEnter * NERDTree
+" Call LightsOn to activate light theme settings.
+fun! LightsOn()
+	colorscheme gruvbox
+	set background=light
+	let g:gruvbox_contrast_light='hard'
+	let g:limelight_conceal_ctermfg = '187'
+	:AirlineRefresh
+endf
 
-" ------------------
-" Editor keybindings
-" ------------------
+" Activate light theme manually.
+command! -nargs=0 LightsOn call LightsOn()
 
-" Define leader key
-let mapleader = ","
+" Activate dark theme by default.
+call LightsOut()
 
-" Clear out a search
+" Theme activation shortcuts.
+nnoremap <silent> <leader>m1 :call LightsOut()<cr>
+nnoremap <silent> <leader>m2 :call LightsOn()<cr>
+
+
+""""""""""""""""""""""""""""""""""""""""
+"
+" => Files, backups and undo
+"
+""""""""""""""""""""""""""""""""""""""""
+
+" Disable file backups.
+set nobackup
+
+" Create a backup before writing to disk (remove after successful write).
+set writebackup
+
+" Disable swap files creation.
+set noswapfile
+
+" Make Vim store the undo history in a file.
+set undofile
+
+" Set undo file location.
+set undodir=~/.vim_undo//,.
+
+""""""""""""""""""""""""""""""""""""""""
+"
+" => Editor key mappings
+"
+""""""""""""""""""""""""""""""""""""""""
+
+" Reload .vimrc.
+nnoremap <leader>rv :source $MYVIMRC<cr>
+
+" Clear out latest search.
 nnoremap <leader>/ :noh<cr>
 
-" Go to the matching bracket when pressing TAB
-nnoremap <tab> %
-vnoremap <tab> %
+" Go to the matching bracket when pressing TAB.
+nmap <tab> %
+vmap <tab> %
 
-" Prevent arrows usage in normal / insert modes
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+" Prevent arrows usage in all modes.
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
 
-" Open file manager
-noremap <leader>o :NERDTreeToggle<cr>
-
-" Go to the next buffer
+" Go to the next buffer.
 noremap <leader>n :bnext<cr>
 
-" Go to the previous buffer
+" Go to the previous buffer.
 noremap <leader>p :bprev<cr>
 
-" List all active buffers
+" List all active buffers.
 noremap <leader>b :ls<cr>
 
-" Close current buffer
+" Close current buffer.
 noremap <leader>c :bd<cr>
 
-" Close active window
+" Close all buffers.
+noremap <leader>ca :bd<cr>
+
+" Close active window.
 noremap <leader><esc> :q<cr>
 
-" Easier split navigation
+" Split buffer navigation.
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
-
-" Reload .vimrc
-nnoremap <leader>rv :source $MYVIMRC<cr>
-
-" Golang keybindings
-augroup gobindings
-	autocmd! gobindings
-	autocmd Filetype go nmap <buffer> <leader>er <Plug>(go-iferr)
-	autocmd Filetype go nnoremap <buffer> <leader>tg :GoAddTags<cr>
-	autocmd Filetype go nmap <buffer> <leader>t <Plug>(go-test)
-	autocmd Filetype go nmap <buffer> <leader>tf <Plug>(go-test-func)
-	autocmd Filetype go nmap <buffer> <leader>a <Plug>(go-alternate-edit)
-	autocmd Filetype go nmap <buffer> <leader>k <Plug>(go-coverage-toggle)
-augroup end
-
-
