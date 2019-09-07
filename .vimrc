@@ -25,6 +25,9 @@ set autowrite
 " Hide mode status info.
 set noshowmode
 
+" Set true terminal colors.
+set termguicolors
+
 """"""""""""""""""""""""""""""""""""""""
 "
 " => Plugins
@@ -108,8 +111,7 @@ let g:airline_symbols.whitespace = 'Ξ'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#whitespace#enabled = 0
-let g:airline_section_b = airline#section#create(['%f'])
-let g:airline_section_c = airline#section#create(['branch'])
+let g:airline#extensions#hunks#enabled = 0
 
 """"""""""""""""""""""""""""""""""""""
 " Goyo
@@ -309,11 +311,12 @@ syntax enable
 
 " Call LightsOut to activate dark theme settings.
 fun! LightsOut()
+	" contrast must be before colorsheme.
+	let g:gruvbox_contrast_dark='hard'
 	colorscheme gruvbox
 	set background=dark 
-	let g:gruvbox_contrast_dark='hard'
 	let g:limelight_conceal_ctermfg = '236'
-	:AirlineRefresh
+	":AirlineRefresh
 endf
 
 " Activate dark theme manually.
@@ -321,11 +324,12 @@ command! -nargs=0 LightsOut call LightsOut()
 
 " Call LightsOn to activate light theme settings.
 fun! LightsOn()
+	" contrast must be before colorsheme.
+	let g:gruvbox_contrast_light='hard'
 	colorscheme gruvbox
 	set background=light
-	let g:gruvbox_contrast_light='hard'
 	let g:limelight_conceal_ctermfg = '187'
-	:AirlineRefresh
+	":AirlineRefresh
 endf
 
 " Activate light theme manually.
@@ -335,9 +339,8 @@ command! -nargs=0 LightsOn call LightsOn()
 call LightsOut()
 
 " Theme activation shortcuts.
-nnoremap <silent> <leader>m1 :call LightsOut()<cr>
-nnoremap <silent> <leader>m2 :call LightsOn()<cr>
-
+nnoremap <leader>m1 :call LightsOut()<cr>
+nnoremap <leader>m2 :call LightsOn()<cr>
 
 """"""""""""""""""""""""""""""""""""""""
 "

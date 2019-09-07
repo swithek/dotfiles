@@ -12,7 +12,7 @@ cursor_shape = block
 scrollbar = off
 
 [colors]
-background = #282828
+background = #1d2021
 foreground = #ebdbb2
 foreground_bold = #ebdbb2
 # dark0 + gray

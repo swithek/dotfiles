@@ -57,7 +57,7 @@ tray-maxsize = 16
 tray-scale = 1.0
 tray-padding = 1
 
-modules-left = i3 battery backlight vpn 
+modules-left = i3 battery backlight vpn
 modules-center = date
 modules-right = storage memory cpu temperature
 

@@ -46,8 +46,8 @@ set_from_resource $term_color15    color15
 
 # Custom commands
 set $assign $HOME/.config/i3/scripts/assign.sh
-set $locker betterlockscreen -l dimblur -t "The end is near."
-set $locker_suspend betterlockscreen -s dimblur -t "The end is near."
+set $locker betterlockscreen -l dimblur -t "The end is nigh."
+set $locker_suspend betterlockscreen -s dimblur -t "The end is nigh."
 set $screenshot cd $HOME/Pictures && scrot
 
 ######################
@@ -88,8 +88,8 @@ exec --no-startup-id pamac-tray
 exec --no-startup-id xautolock -time 10 -locker $locker
 exec --no-startup-id udiskie -AntF2
 exec --no-startup-id compton -b
-exec --no-startup-id betterlockscreen -u $HOME/.config/wallpapers/forest.png
 exec --no-startup-id feh --bg-fill $HOME/.config/wallpapers/forest.png
+exec_always --no-startup-id $HOME/.config/i3/scripts/lock_wallpaper.sh
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
 exec_always --no-startup-id $HOME/.config/polybar/scripts/launch.sh
@@ -286,6 +286,7 @@ mode "resize" {
 ## Window management ##
 #######################
 
+assign [class="discord" instance="discord"] $ws2
 assign [class="TelegramDesktop" instance="telegram-desktop"] $ws2
 assign [class="Termite" instance="cmus"] $ws4
 assign [class="Termite" instance="weechat"] $ws2
