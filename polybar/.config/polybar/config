@@ -57,7 +57,7 @@ tray-maxsize = 16
 tray-scale = 1.0
 tray-padding = 1
 
-modules-left = i3 battery backlight vpn
+modules-left = i3 battery dots_modified backlight vpn
 modules-center = date
 modules-right = storage memory cpu temperature
 
@@ -241,6 +241,11 @@ ramp-4-foreground = ${colors.color11}
 [module/vpn]
 type = custom/script
 exec = ~/.config/polybar/scripts/vpn.sh
+interval = 5
+
+[module/dots_modified]
+type = custom/script
+exec = ~/.config/polybar/scripts/modified.sh
 interval = 5
 
 ; vim:ft=dosini
