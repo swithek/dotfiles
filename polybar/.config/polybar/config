@@ -240,7 +240,8 @@ ramp-4-foreground = ${colors.color11}
 
 [module/vpn]
 type = custom/script
-exec = ~/.config/polybar/scripts/vpn.sh
+exec = ~/.config/polybar/scripts/vpn.sh --country
+click-left = ~/.config/polybar/scripts/vpn.sh --details
 interval = 5
 
 [module/dots_modified]

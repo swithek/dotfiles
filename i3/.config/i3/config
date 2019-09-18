@@ -213,8 +213,11 @@ bindsym $mod+c exec $term -e weechat --name=weechat
 # Open cmus.
 bindsym $mod+m exec $term -e cmus --name=cmus
 
-# Toggle music player.
+# Toggle music player state.
 bindsym $mod+z exec cmus-remote -u
+
+# Save current stream song.
+bindsym $mod+Shift+z exec --no-startup-id $HOME/.config/i3/scripts/cmus_stream_save.sh
 
 # Activate window assign mode.
 bindsym $mod+grave mode "assign"

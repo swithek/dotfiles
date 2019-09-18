@@ -56,6 +56,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'junegunn/goyo.vim' 
 Plug 'junegunn/limelight.vim' 
 Plug 'morhetz/gruvbox'
+Plug 'cespare/vim-toml'
 
 """"""""""""""""""""""""""""""""""""""
 " => Development plugins
