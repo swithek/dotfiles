@@ -228,7 +228,7 @@ fun! Prose()
 	" Cycle through Wordy's categories.
 	nnoremap <buffer> <silent> <leader>wo :NextWordy<cr>
 
-	" Discble Wordy.
+	" Disable Wordy.
 	nnoremap <buffer> <silent> <leader>wO :NoWordy<cr>
 
 	" Toggle Ditto state.
@@ -236,7 +236,7 @@ fun! Prose()
 endf
 
 " Activate Prose mode automatically.
-autocmd FileType markdown,text call Prose()
+" autocmd FileType markdown,text call Prose()
 
 " Activate Prose mode manually.
 command! -nargs=0 Prose call Prose()
@@ -259,8 +259,13 @@ set foldmethod=syntax
 " Show line numbers.
 set number
 
+" Bring love and joy into the world.
+set noexpandtab
+
 " Width of the TAB character.
 set tabstop=8
+set shiftwidth=8
+set softtabstop=8
 
 " Display TAB as characters.
 set list 
@@ -276,7 +281,7 @@ set magic
 set cursorline
 
 " Show the recommended length of line.
-set colorcolumn=80
+set colorcolumn=79
 
 " Do not wrap the lines.
 set nowrap
