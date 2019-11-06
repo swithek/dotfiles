@@ -272,7 +272,7 @@ mode "resize" {
 	bindsym $left resize shrink width 5 px or 5 ppt
 	
 	# Increase window's height.
-	bindsym $up resize grow height 5 px or 5 ppt
+	bindsym $up Resize grow height 5 px or 5 ppt
 
 	# Shrink window's height.
 	bindsym $down resize shrink height 5 px or 5 ppt
@@ -289,6 +289,12 @@ mode "resize" {
 ## Window management ##
 #######################
 
+# Spotify requires additional actions. More at:
+# https://www.reddit.com/r/i3wm/comments/9hu4j7/spotify_on_custom_workspace/
+for_window [class = "Spotify"] move to workspace $ws4
+
+assign [class="Spotify" instance="spotify"] $ws4
+assign [class="Termite" instance="termite"] $ws1
 assign [class="discord" instance="discord"] $ws2
 assign [class="TelegramDesktop" instance="telegram-desktop"] $ws2
 assign [class="Termite" instance="cmus"] $ws4
@@ -300,7 +306,6 @@ assign [class="Signal" instance="signal"] $ws2
 assign [class="FreeTube" instance="freetube"] $ws4
 assign [class="Chromium" instance="chromium"] $ws3
 assign [class="firefoxdeveloperedition" instance="Navigator"] $ws3
-assign [class="Termite" instance="termite"] $ws1
 
 ##################
 ## Theme colors ##
