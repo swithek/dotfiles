@@ -11,9 +11,9 @@ ip_data=($(wget -qO - ifconfig.co/json | jq -r '.ip, .country'))
 if [ -z "$1" ] || [ "$1" == '--ip' ]; then 
 	info=${ip_data[0]}
 elif [ "$1" == "--country" ]; then 
-	info=${ip_data[1]}
+	info=${ip_data[*]:1}
 elif [ "$1" == "--details" ]; then
-	details="IP: ${ip_data[0]}\nCountry: ${ip_data[1]}"
+	details="IP: ${ip_data[0]}\nCountry: ${ip_data[*]:1}"
 	notify-send -t 3000 "VPN details" "$details"
 	exit
 fi
