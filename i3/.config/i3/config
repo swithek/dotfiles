@@ -2,6 +2,9 @@
 ## Variable setup ##
 ####################
 
+# Message shown on the lock screen.
+set $lock_msg "The end is nigh."
+
 # Mod key.
 set $mod Mod4
 
@@ -23,6 +26,10 @@ set $ws8 8
 
 # Terminal emulator.
 set $term termite
+set $term_dedicated termite --name=termite_dedicated
+
+# Open dotfiles directory.
+set $dotfiles termite -d ~/.dotfiles/
 
 # Color palette used for the terminal (~/.Xresources file).
 set_from_resource $term_background background
@@ -46,8 +53,8 @@ set_from_resource $term_color15    color15
 
 # Custom commands
 set $assign $HOME/.config/i3/scripts/assign.sh
-set $locker betterlockscreen -l dimblur -t "The end is nigh."
-set $locker_suspend betterlockscreen -s dimblur -t "The end is nigh."
+set $locker betterlockscreen -l dimblur -t $lock_msg
+set $locker_suspend betterlockscreen -s dimblur -t $lock_msg
 set $screenshot cd $HOME/Pictures && scrot
 
 ######################
@@ -186,8 +193,14 @@ bindsym $mod+Shift+a move container to workspace $ws8; workspace $ws8
 # Lock screen.
 bindsym $mod+9 exec --no-startup-id exec $locker
 
+# Start a terminal emulator on a dedicated workspace.
+bindsym $mod+Return exec $term_dedicated
+
 # Start a terminal emulator.
-bindsym $mod+Return exec $term
+bindsym $mod+Shift+Return exec $term
+
+# Open dotfiles directory in terminal.
+bindsym $mod+Shift+u exec $dotfiles
 
 # Screenshot the whole screen.
 bindsym Print --release exec --no-startup-id $screenshot && sleep 1 &&\
@@ -293,8 +306,9 @@ mode "resize" {
 # https://www.reddit.com/r/i3wm/comments/9hu4j7/spotify_on_custom_workspace/
 for_window [class = "Spotify"] move to workspace $ws4
 
+assign [class="Steam" instance="Steam"] $ws6
 assign [class="Spotify" instance="spotify"] $ws4
-assign [class="Termite" instance="termite"] $ws1
+assign [class="Termite" instance="termite_dedicated"] $ws1
 assign [class="discord" instance="discord"] $ws2
 assign [class="TelegramDesktop" instance="telegram-desktop"] $ws2
 assign [class="Termite" instance="cmus"] $ws4
