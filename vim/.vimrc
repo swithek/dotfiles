@@ -191,6 +191,7 @@ let g:lexical#spelllang = ['en_gb']
 
 " Call Prose() to activate prose-specific settings for the active buffer.
 fun! Prose()
+	setl nocursorline
 	setl textwidth=74
 	call pencil#init()
 	call textobj#quote#init()
