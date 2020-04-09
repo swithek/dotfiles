@@ -145,10 +145,16 @@ let g:go_auto_type_info = 1
 let g:go_test_show_name = 1
 
 " Specifiy a tool for signature / type fetching.
-let g:go_info_mode = 'gopls'
+let g:go_info_mode = "gopls"
 
 " Automatically highlight all uses of the indentifier.
 let g:go_auto_sameids = 1
+
+" Run extended linter on save.
+let g:go_metalinter_autosave = 1
+
+" Command to run when :GoAlternate is used.
+let g:go_alternate_mode = "vsplit"
 
 " Various syntax objects highlighting.
 let g:go_highlight_generate_tags = 1
@@ -160,6 +166,21 @@ let g:go_highlight_variable_assignments = 1
 
 augroup gobindings
 	autocmd! gobindings
+
+	" Generate interface implementation stub on type under the cursor.
+	autocmd FileType go nnoremap <buffer> <leader>i :GoImpl<cr>
+
+	" Show what interfaces are implemented by the type under the cursor.
+	autocmd FileType go nnoremap <buffer> <leader>w :GoImplements<cr>
+
+	" Show all use places of selected identifier.
+	autocmd FileType go nnoremap <buffer> <leader>r :GoReferrers<cr>
+
+	" Show selected syntax piece info.
+	autocmd FileType go nnoremap <buffer> <leader>d :GoDescribe<cr>
+
+	" Go to alternate file.
+	autocmd FileType go nnoremap <buffer> <leader>a :GoAlternate!<cr>
 
 	" Generate error checks.
 	autocmd FileType go nmap <buffer> <leader>er <Plug>(go-iferr)
@@ -310,6 +331,9 @@ set smartcase
 " Apply global substitutions on lines.
 set gdefault
 
+" Disable preview window during insert completion.
+set completeopt-=preview
+
 " Set the character encoding used inside Vim.
 set encoding=utf-8
 
@@ -375,6 +399,11 @@ set undodir=~/.vim_undo//,.
 " => Editor key mappings
 "
 """"""""""""""""""""""""""""""""""""""""
+
+" Omnifunc shortcut.
+" When in terminal, <C-Space> gets interpreted as <C-@>.
+inoremap <C-Space> <C-x><C-o>
+imap <C-@> <C-Space>
 
 " Reload .vimrc.
 nnoremap <leader>rv :source $MYVIMRC<cr>
