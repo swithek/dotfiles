@@ -183,7 +183,10 @@ augroup gobindings
 	autocmd FileType go nnoremap <buffer> <leader>w :GoImplements<cr>
 
 	" Show all use places of selected identifier.
-	autocmd FileType go nnoremap <buffer> <leader>r :GoReferrers<cr>
+	autocmd FileType go nnoremap <buffer> <leader>p :GoReferrers<cr>
+
+	" Rename object under the cursor.
+	autocmd FileType go nnoremap <buffer> <leader>r :GoRename<cr>
 
 	" Show selected syntax piece info.
 	autocmd FileType go nnoremap <buffer> <leader>d :GoDescribe<cr>
