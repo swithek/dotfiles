@@ -135,17 +135,14 @@ nnoremap <silent> <leader>x :Limelight!!<cr>
 " => vim-go
 """"""""""""""""""""""""""""""""""""""
 
-" Run goimports when using gofmt.
-let g:go_fmt_command = "goimports"
+" Command to run during formatting.
+let g:go_fmt_command = "gopls"
 
 " Get signature / type info under the cursor.
 let g:go_auto_type_info = 1
 
 " Show the name of each failed test.
 let g:go_test_show_name = 1
-
-" Specifiy a tool for signature / type fetching.
-let g:go_info_mode = "gopls"
 
 " Automatically highlight all uses of the indentifier.
 let g:go_auto_sameids = 1
@@ -155,6 +152,18 @@ let g:go_metalinter_autosave = 1
 
 " Command to run when :GoAlternate is used.
 let g:go_alternate_mode = "vsplit"
+
+" Show documentation in a popup window.
+let g:go_doc_popup_window = 1
+
+" Command to run when checking what interfaces are implemented.
+let g:go_implements_mode = "gopls"
+
+" Command to run when renaming.
+let g:go_rename_command = "gopls"
+
+" Don't add tags on unexported fields.
+let g:go_addtags_skip_unexported = 1
 
 " Various syntax objects highlighting.
 let g:go_highlight_generate_tags = 1
