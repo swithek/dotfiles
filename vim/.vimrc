@@ -63,6 +63,7 @@ Plug 'cespare/vim-toml'
 """"""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/nerdcommenter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+Plug 'SirVer/ultisnips'
 
 """"""""""""""""""""""""""""""""""""""
 " => Writing (prose, etc.) plugins
@@ -183,7 +184,7 @@ augroup gobindings
 	autocmd FileType go nnoremap <buffer> <leader>w :GoImplements<cr>
 
 	" Show all use places of selected identifier.
-	autocmd FileType go nnoremap <buffer> <leader>p :GoReferrers<cr>
+	autocmd FileType go nnoremap <buffer> <leader>f :GoReferrers<cr>
 
 	" Rename object under the cursor.
 	autocmd FileType go nnoremap <buffer> <leader>r :GoRename<cr>
@@ -209,6 +210,14 @@ augroup gobindings
 	" Toggle code coverage.
 	autocmd FileType go nmap <buffer> <leader>k <Plug>(go-coverage-toggle)
 augroup end
+
+""""""""""""""""""""""""""""""""""""""
+" => ultisnips
+""""""""""""""""""""""""""""""""""""""
+
+let g:UltiSnipsJumpForwardTrigger="<c-s-k>"
+let g:UltiSnipsJumpBackwardTrigger="<c-s-j>"
+let g:UltiSnipsEditSplit="vertical"
 
 """"""""""""""""""""""""""""""""""""""
 " => vim-lexical
@@ -419,6 +428,9 @@ imap <C-@> <C-Space>
 
 " Reload .vimrc.
 nnoremap <leader>rv :source $MYVIMRC<cr>
+
+" Start modifying .vimrc.
+nnoremap <leader>uv :vs $MYVIMRC<cr>
 
 " Clear out latest search.
 nnoremap <leader>/ :noh<cr>

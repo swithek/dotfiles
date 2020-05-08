@@ -18,4 +18,8 @@ elif [ "$1" == "--details" ]; then
 	exit
 fi
 
+if [ -z "$info" ]; then
+	info="[TBD]"
+fi
+
 echo %{F$icon_color}%{F-} "$info"
