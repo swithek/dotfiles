@@ -137,7 +137,7 @@ nnoremap <silent> <leader>x :Limelight!!<cr>
 """"""""""""""""""""""""""""""""""""""
 
 " Command to run during formatting.
-let g:go_fmt_command = "gopls"
+let g:go_fmt_command = "goimports"
 
 " Get signature / type info under the cursor.
 let g:go_auto_type_info = 1
@@ -215,9 +215,17 @@ augroup end
 " => ultisnips
 """"""""""""""""""""""""""""""""""""""
 
+" Jump to next tabstop.
 let g:UltiSnipsJumpForwardTrigger="<c-s-k>"
+
+" Jump to previous tabstop.
 let g:UltiSnipsJumpBackwardTrigger="<c-s-j>"
+
+" Split veritically when editing snippets.
 let g:UltiSnipsEditSplit="vertical"
+
+" Start editing snippets of the active file filetype.
+nnoremap <leader>s :UltiSnipsEdit<cr>
 
 """"""""""""""""""""""""""""""""""""""
 " => vim-lexical

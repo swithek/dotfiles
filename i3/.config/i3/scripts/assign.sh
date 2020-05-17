@@ -7,7 +7,7 @@ if [ -n "$1" ]; then
 fi
 
 info=($(xprop -id $(xprop -root -f _NET_ACTIVE_WINDOW 0x " \$0\\n" _NET_ACTIVE_WINDOW | \
-	awk "{print \$2}") | \
+	awk '{print $2}') | \
 	sed -nE 's/^WM_CLASS.*= "([_a-zA-Z0-9-]+)", "([_a-zA-Z0-9-]+)"/\1\ \2/p'))
 
 sed --follow-symlinks -i -E "/^assign.+class=\"${info[1]}\" instance=\"${info[0]}\"/ d;
