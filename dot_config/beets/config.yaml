@@ -1,0 +1,48 @@
+# Active plugins.
+plugins: lastgenre fetchart embedart scrub zero missing
+
+# Library database location.
+library: ~/.cache/beets/library.db
+
+# Import custom options.
+import:
+        # Copy updated music files to the library.
+        copy: yes
+
+        # Write metadata to music files.
+        write: yes
+
+        # Use existing music files' metadata only to find
+        # new data on remote sources, remove it when the new
+        # data is being applied to the files / database.
+        # Since sundry tools are used to clean up metadata, to
+        # avoid confusion, read this https://github.com/beetbox/beets/pull/2755#issuecomment-352207381.
+        from_scratch: yes
+
+        # group music not by parent directory but by
+        # album metadata field.
+        #group_albums: yes
+
+# Automatically retrieve genre info.
+lastgenre:
+        # Max genres to retrieve.
+        count: 5
+
+        # Find as specific genre as possible.
+        canonical: yes
+        prefer_specific: yes
+
+# Embed images into music files.
+embedart:
+        # remove art file from album directory after embedding
+        # it.
+        remove_art_file: yes
+
+# Keep only specific metadata fields in music files.
+zero:
+        # metadata fields to keep in music files.
+        keep_fields: title artist album year track genre genres images
+
+        # database should include the same metadata fields
+        # as music files.
+        update_database: true

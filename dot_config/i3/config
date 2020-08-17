@@ -1,0 +1,333 @@
+####################
+## Variable setup ##
+####################
+
+# Message shown on the lock screen.
+set $lock_msg "The end is nigh."
+
+# Mod key.
+set $mod Mod4
+
+# Movement base controls.
+set $left h
+set $right l
+set $up k
+set $down j
+
+# Workspace numbers.
+set $ws1 1
+set $ws2 2
+set $ws3 3
+set $ws4 4
+set $ws5 5
+set $ws6 6
+set $ws7 7
+set $ws8 8
+
+# Terminal emulator.
+set $term termite
+set $term_dedicated termite --name=termite_dedicated
+
+# Open dotfiles directory.
+set $dotfiles termite -d ~/.dotfiles/
+
+# Color palette used for the terminal (~/.Xresources file).
+set_from_resource $term_background background
+set_from_resource $term_foreground foreground
+set_from_resource $term_color0     color0
+set_from_resource $term_color1     color1
+set_from_resource $term_color2     color2
+set_from_resource $term_color3     color3
+set_from_resource $term_color4     color4
+set_from_resource $term_color5     color5
+set_from_resource $term_color6     color6
+set_from_resource $term_color7     color7
+set_from_resource $term_color8     color8
+set_from_resource $term_color9     color9
+set_from_resource $term_color10    color10
+set_from_resource $term_color11    color11
+set_from_resource $term_color12    color12
+set_from_resource $term_color13    color13
+set_from_resource $term_color14    color14
+set_from_resource $term_color15    color15
+
+# Custom commands
+set $assign $HOME/.config/i3/scripts/assign.sh
+set $locker betterlockscreen -l dimblur -t $lock_msg
+set $locker_suspend betterlockscreen -s dimblur -t $lock_msg
+set $screenshot cd $HOME/Pictures && scrot
+
+######################
+## General settings ##
+######################
+
+# Font for window titles. 
+font xft:SourceCodePro Medium 11
+
+# Align window title.
+title_align center
+
+# Configure border style.
+new_window pixel 1
+new_float normal
+
+# Hide borders.
+hide_edge_borders none
+
+# Focus under cursor.
+focus_follows_mouse no
+
+# Return to previous workspace.
+workspace_auto_back_and_forth no
+
+# Use Mouse+$mod to drag floating windows.
+floating_modifier $mod
+
+############################
+## Autostart applications ##
+############################
+
+exec --no-startup-id volumeicon
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nm-applet
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id xautolock -time 10 -locker $locker
+exec --no-startup-id udiskie -AntF2
+exec --no-startup-id compton -b
+exec --no-startup-id feh --bg-fill $HOME/.config/wallpapers/forest.png
+exec_always --no-startup-id $HOME/.config/i3/scripts/lock_wallpaper.sh
+exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
+exec_always --no-startup-id $HOME/.config/polybar/scripts/launch.sh
+
+##################
+## Key bindings ##
+##################
+
+# Reload the configuration file.
+bindsym $mod+Shift+c reload
+
+# Restart i3 (preserves layout/session, can be used to upgrade i3).
+bindsym $mod+Shift+r restart
+
+# Exit i3 (logs you out of your X session).
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# Kill focused window.
+bindsym $mod+Shift+q kill
+
+# Hard kill focused window.
+bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+
+# Toggle fullscreen mode for the focused container.
+bindsym $mod+f fullscreen toggle
+
+# Toggle split direction.
+bindsym $mod+v split toggle; exec notify-send 'Split direction changed'
+
+# Toggle containers layout split.
+bindsym $mod+e layout toggle split
+
+# Change focus.
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Focus the parent container.
+bindsym $mod+a focus parent
+
+# Move focused window.
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# Return to previous workspace.
+bindsym $mod+b workspace back_and_forth
+
+# Move container to previous workspace.
+bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+
+# Toggle tiling / floating.
+bindsym $mod+Shift+space floating toggle
+
+# Change focus between tiling / floating windows.
+bindsym $mod+space focus mode_toggle
+
+# Change borders.
+bindsym $mod+u border none
+bindsym $mod+y border pixel 1
+
+# Toggle window stickiness.
+bindsym $mod+Shift+s sticky toggle
+
+# Navigate workspaces next / previous.
+bindsym $mod+Ctrl+$left workspace prev
+bindsym $mod+Ctrl+$right workspace next
+
+# Switch to workspace.
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+
+# Move to workspace with focused container.
+bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+
+# Move to catch-all workspace with focused window.
+bindsym $mod+Shift+a move container to workspace $ws8; workspace $ws8
+
+# Lock screen.
+bindsym $mod+9 exec --no-startup-id exec $locker
+
+# Start a terminal emulator on a dedicated workspace.
+bindsym $mod+Return exec $term_dedicated
+
+# Start a terminal emulator.
+bindsym $mod+Shift+Return exec $term
+
+# Open dotfiles directory in terminal.
+bindsym $mod+Shift+u exec $dotfiles
+
+# Screenshot the whole screen.
+bindsym Print --release exec --no-startup-id $screenshot && sleep 1 &&\
+	notify-send "Whole screen screenshot was saved in ~/Pictures"
+
+# Screenshot only the focused window.
+bindsym $mod+Print --release exec --no-startup-id $screenshot -u && sleep 1 &&\
+	notify-send "Active window screenshot was saved in ~/Pictures"
+
+# Screenshot specified window.
+bindsym $mod+Shift+Print --release exec --no-startup-id $screenshot -s && sleep 1 &&\
+	notify-send "Selected window screenshot was saved in ~/Pictures"
+
+# Open file manager.
+bindsym $mod+g exec $term -e ranger --name=ranger
+
+# Start rofi.
+bindsym $mod+d exec --no-startup-id rofi -show run
+
+# Open WeeChat.
+bindsym $mod+c exec $term -e weechat --name=weechat
+
+# Open cmus.
+bindsym $mod+m exec $term -e cmus --name=cmus
+
+# Toggle music player state.
+bindsym $mod+z exec cmus-remote -u
+
+# Save current stream song.
+bindsym $mod+Shift+z exec --no-startup-id $HOME/.config/i3/scripts/cmus_stream_save.sh
+
+# Activate window assign mode.
+bindsym $mod+grave mode "assign"
+
+# Activate system session management mode.
+bindsym $mod+0 mode "$mode_system"
+
+# Activate focused window resize mode.
+bindsym $mod+r mode "resize"
+
+##################
+## Custom modes ##
+##################
+
+# Move and assign focused window (modifies config file).
+mode "assign" {
+	# Move to workspace with focused container.
+	bindsym $mod+1 exec $assign $ws1; move container to workspace $ws1; workspace $ws1; reload; restart
+	bindsym $mod+2 exec $assign $ws2; move container to workspace $ws2; workspace $ws2; reload; restart
+	bindsym $mod+3 exec $assign $ws3; move container to workspace $ws3; workspace $ws3; reload; restart
+	bindsym $mod+4 exec $assign $ws4; move container to workspace $ws4; workspace $ws4; reload; restart
+	bindsym $mod+5 exec $assign $ws5; move container to workspace $ws5; workspace $ws5; reload; restart
+	bindsym $mod+6 exec $assign $ws6; move container to workspace $ws6; workspace $ws6; reload; restart
+	bindsym $mod+7 exec $assign $ws7; move container to workspace $ws7; workspace $ws7; reload; restart
+	bindsym $mod+8 exec $assign $ws8; move container to workspace $ws8; workspace $ws8; reload; restart
+
+	# Move to catch-all workspace with focused window.
+	bindsym $mod+a exec $assign $ws8; move container to workspace $ws8; workspace $ws8; reload; restart
+	
+	# Exit window assign mode.
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+# System session management.
+set $mode_system (l)ock, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+mode "$mode_system" {
+	bindsym l exec --no-startup-id exec $locker, mode "default"
+	bindsym s exec --no-startup-id exec $locker_suspend, mode "default"
+	bindsym h exec --no-startup-id exec systemctl hibernate, mode "default"
+	bindsym r exec --no-startup-id systemctl reboot, mode "default"
+	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+	# Exit system session management mode.
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+# Resize focused window.
+mode "resize" {
+	# Shrink window's width.
+	bindsym $left resize shrink width 5 px or 5 ppt
+	
+	# Increase window's height.
+	bindsym $up Resize grow height 5 px or 5 ppt
+
+	# Shrink window's height.
+	bindsym $down resize shrink height 5 px or 5 ppt
+
+	# Increase window's width.
+	bindsym $right resize grow width 5 px or 5 ppt
+
+	# Exit focused window resize mode.
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+#######################
+## Window management ##
+#######################
+
+# Spotify requires additional actions. More at:
+# https://www.reddit.com/r/i3wm/comments/9hu4j7/spotify_on_custom_workspace/
+for_window [class = "Spotify"] move to workspace $ws4
+
+assign [class="FreeTube" instance="freetube"] $ws5
+assign [class="Steam" instance="Steam"] $ws6
+assign [class="Spotify" instance="spotify"] $ws4
+assign [class="Termite" instance="termite_dedicated"] $ws1
+assign [class="discord" instance="discord"] $ws2
+assign [class="TelegramDesktop" instance="telegram-desktop"] $ws2
+assign [class="Termite" instance="cmus"] $ws4
+assign [class="Termite" instance="weechat"] $ws2
+assign [class="Pychess" instance="pychess"] $ws6
+assign [class="vlc" instance="vlc"] $ws5
+assign [class="Audacious" instance="audacious"] $ws4
+assign [class="Signal" instance="signal"] $ws2
+assign [class="Chromium" instance="chromium"] $ws3
+assign [class="firefoxdeveloperedition" instance="Navigator"] $ws3
+
+##################
+## Theme colors ##
+##################
+
+client.focused          $term_color8 $term_color8 $term_foreground $term_color3 $term_color8
+client.focused_inactive $term_color0 $term_color0 $term_foreground $term_color3 $term_color0
+client.unfocused        $term_color0 $term_color0 $term_foreground $term_color3 $term_color0
+client.urgent           $term_color9 $term_color9 $term_foreground $term_color3 $term_color9
+client.placeholder      $term_color0 $term_color0 $term_foreground $term_color3 $term_color0
+client.background       $term_background
