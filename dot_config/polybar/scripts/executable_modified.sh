@@ -1,6 +1,6 @@
 #! /bin/bash
 
-if [ -n "$(git -C $HOME/.dotfiles/ status --porcelain)" ]; then
+if [ -n "$(git -C "$(chezmoi source-path)" status --porcelain)" ]; then
 	echo %{F#cc241d}%{F-}
 	exit
 fi

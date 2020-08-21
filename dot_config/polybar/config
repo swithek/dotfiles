@@ -248,6 +248,5 @@ interval = 60
 type = custom/script
 exec = ~/.config/polybar/scripts/modified.sh
 interval = 5
-click-left = termite -d ~/.dotfiles/ > /dev/null 2>&1 &
 
 ; vim:ft=dosini
