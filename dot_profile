@@ -6,3 +6,5 @@ export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
 export NNN_OPTS='deR'
 export NNN_COLORS='6666'
+
+# vim:ft=bash

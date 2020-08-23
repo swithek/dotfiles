@@ -38,3 +38,5 @@ alias df='df -h'
 
 # show sizes in MB
 alias free='free -m'                      
+
+# vim:ft=bash

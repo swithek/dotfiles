@@ -94,7 +94,7 @@ exec --no-startup-id xfce4-power-manager
 exec --no-startup-id pamac-tray
 exec --no-startup-id xautolock -time 10 -locker $locker
 exec --no-startup-id udiskie -AntF2
-exec --no-startup-id compton -b
+exec --no-startup-id picom -b
 exec --no-startup-id feh --bg-fill $HOME/.config/wallpapers/forest.png
 exec_always --no-startup-id $HOME/.config/i3/scripts/lock_wallpaper.sh
 exec_always --no-startup-id ff-theme-util
@@ -215,7 +215,7 @@ bindsym $mod+Shift+Print --release exec --no-startup-id $screenshot -s && sleep 
 	notify-send "Selected window screenshot was saved in ~/Pictures"
 
 # Open file manager.
-bindsym $mod+g exec $term -e ranger --name=ranger
+bindsym $mod+g exec $term -e nnn --name=nnn
 
 # Start rofi.
 bindsym $mod+d exec --no-startup-id rofi -show run

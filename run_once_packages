@@ -1,0 +1,22 @@
+#!/bin/bash
+
+pkgs=(
+	vim		# editor
+	beets		# music organiser
+	dunst		# notification manager
+	#i3-wm		# tilling window manager
+	polybar		# status bar
+	cmus		# music player
+	rofi		# dmenu replacement
+	termite		# terminal emulator
+	picom		# compositor
+	nnn		# terminal file manager
+	go		# go language
+	volumeicon
+	network-manager-applet
+	udiskie
+	feh
+	betterlockscreen
+)
+
+yay -Syu --needed "${pkgs[@]}"
