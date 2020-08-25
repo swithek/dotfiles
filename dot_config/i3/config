@@ -2,9 +2,6 @@
 ## Variable setup ##
 ####################
 
-# Message shown on the lock screen.
-set $lock_msg "The end is nigh."
-
 # Mod key.
 set $mod Mod4
 
@@ -24,14 +21,7 @@ set $ws6 6
 set $ws7 7
 set $ws8 8
 
-# Terminal emulator.
-set $term termite
-set $term_dedicated termite --name=termite_dedicated
-
-# Open dotfiles directory.
-set $dotfiles termite -d ~/.dotfiles/
-
-# Color palette used for the terminal (~/.Xresources file).
+# Colour palette used by the terminal (~/.Xresources file).
 set_from_resource $term_background background
 set_from_resource $term_foreground foreground
 set_from_resource $term_color0     color0
@@ -52,10 +42,17 @@ set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
 # Custom commands
+set $term termite
+set $term_dedicated termite --name=termite_dedicated
+set $filemanager termite -e nnn --name=nnn
+set $dotfiles termite -d "$(chezmoi source-path)"
 set $assign $HOME/.config/i3/scripts/assign.sh
-set $locker betterlockscreen -l dimblur -t $lock_msg
-set $locker_suspend betterlockscreen -s dimblur -t $lock_msg
-set $screenshot cd $HOME/Pictures && scrot
+set $cmus_stream_save $HOME/.config/i3/scripts/cmus_stream_save.sh
+set $lock_wallpaper $HOME/.config/i3/scripts/lock_wallpaper.sh
+set $polybar $HOME/.config/polybar/scripts/launch.sh
+set $locker betterlockscreen -l dimblur -t "The end is nigh."
+set $locker_suspend betterlockscreen -s dimblur -t "The end is nigh."
+set $screenshot scrot '%Y-%m-%d-%H-%M.png' -e 'mv $f ~/Pictures/screenshots/'
 
 ######################
 ## General settings ##
@@ -87,19 +84,15 @@ floating_modifier $mod
 ## Autostart applications ##
 ############################
 
+exec_always --no-startup-id $polybar
+exec_always --no-startup-id $lock_wallpaper
+exec --no-startup-id xautolock -time 2 -locker $locker
 exec --no-startup-id volumeicon
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet
-exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-exec --no-startup-id xautolock -time 10 -locker $locker
-exec --no-startup-id udiskie -AntF2
+exec --no-startup-id cbatticon -u 20 -l 15 -r 5
+exec --no-startup-id udiskie -Ant -f '$filemanager -d' -m nested
 exec --no-startup-id picom -b
 exec --no-startup-id feh --bg-fill $HOME/.config/wallpapers/forest.png
-exec_always --no-startup-id $HOME/.config/i3/scripts/lock_wallpaper.sh
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
-exec_always --no-startup-id $HOME/.config/polybar/scripts/launch.sh
 
 ##################
 ## Key bindings ##
@@ -210,18 +203,18 @@ bindsym Print --release exec --no-startup-id $screenshot && sleep 1 &&\
 bindsym $mod+Print --release exec --no-startup-id $screenshot -u && sleep 1 &&\
 	notify-send "Active window screenshot was saved in ~/Pictures"
 
-# Screenshot specified window.
+# Screenshot selected area.
 bindsym $mod+Shift+Print --release exec --no-startup-id $screenshot -s && sleep 1 &&\
-	notify-send "Selected window screenshot was saved in ~/Pictures"
+	notify-send "Selected area screenshot was saved in ~/Pictures"
 
 # Open file manager.
-bindsym $mod+g exec $term -e nnn --name=nnn
+bindsym $mod+g exec $filemanager
 
 # Start rofi.
 bindsym $mod+d exec --no-startup-id rofi -show run
 
 # Open WeeChat.
-bindsym $mod+c exec $term -e weechat --name=weechat
+#bindsym $mod+c exec $term -e weechat --name=weechat
 
 # Open cmus.
 bindsym $mod+m exec $term -e cmus --name=cmus
@@ -230,7 +223,7 @@ bindsym $mod+m exec $term -e cmus --name=cmus
 bindsym $mod+z exec cmus-remote -u
 
 # Save current stream song.
-bindsym $mod+Shift+z exec --no-startup-id $HOME/.config/i3/scripts/cmus_stream_save.sh
+bindsym $mod+Shift+z exec --no-startup-id $cmus_stream_save
 
 # Activate window assign mode.
 bindsym $mod+grave mode "assign"

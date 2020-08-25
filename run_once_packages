@@ -1,22 +1,29 @@
 #!/bin/bash
 
 pkgs=(
-	vim		# editor
-	beets		# music organiser
-	dunst		# notification manager
-	#i3-wm		# tilling window manager
-	polybar		# status bar
-	cmus		# music player
-	rofi		# dmenu replacement
-	termite		# terminal emulator
-	picom		# compositor
-	nnn		# terminal file manager
-	go		# go language
-	volumeicon
-	network-manager-applet
-	udiskie
-	feh
-	betterlockscreen
+	vim				# editor
+	beets				# music organiser
+	dunst				# notification manager
+	#i3-wm				# tilling window manager
+	polybar				# status bar
+	cmus				# music player
+	rofi				# dmenu replacement
+	termite				# terminal emulator
+	picom				# compositor
+	nnn				# terminal file manager
+	adobe-source-code-pro-fonts	# main font
+	volumeicon			# system tray volume control
+	network-manager-applet		# GUI / system tray network manager control
+	udiskie				# disk automounter
+	feh				# image viewer 
+	betterlockscreen		# screen locker
+	scrot				# screenshot utility
+	xautolock			# automatic locking utility
+	cbatticon			# battery system tray icon
 )
 
 yay -Syu --needed "${pkgs[@]}"
+
+if [[ ! -d "$HOME/Pictures/screenshots" ]]; then
+	mkdir -p "$HOME/Pictures/screenshots"
+fi
