@@ -5,6 +5,6 @@ export BROWSER=/usr/bin/firefox-developer-edition
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
 export NNN_OPTS='deR'
-export NNN_COLORS='6666'
+export NNN_FCOLORS='c1e24709006033f7c6d6abc4'
 
 # vim:ft=bash
