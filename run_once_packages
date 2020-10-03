@@ -23,6 +23,7 @@ pkgs=(
 	diff-so-fancy			# diff pager
 	gruvbox-dark-gtk		# gtk gruvbox theme
 	gruvbox-dark-icons-gtk		# gtk gruvbox icons
+	lxappearance			# theme switcher
 )
 
 yay -Syu --needed "${pkgs[@]}"
