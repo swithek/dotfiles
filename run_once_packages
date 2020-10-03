@@ -4,7 +4,7 @@ pkgs=(
 	vim				# editor
 	beets				# music organiser
 	dunst				# notification manager
-	#i3-wm				# tilling window manager
+	i3-wm				# tilling window manager
 	polybar				# status bar
 	cmus				# music player
 	rofi				# dmenu replacement
@@ -20,6 +20,9 @@ pkgs=(
 	scrot				# screenshot utility
 	xautolock			# automatic locking utility
 	cbatticon			# battery system tray icon
+	diff-so-fancy			# diff pager
+	gruvbox-dark-gtk		# gtk gruvbox theme
+	gruvbox-dark-icons-gtk		# gtk gruvbox icons
 )
 
 yay -Syu --needed "${pkgs[@]}"
