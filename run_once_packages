@@ -24,10 +24,15 @@ pkgs=(
 	gruvbox-dark-gtk		# gtk gruvbox theme
 	gruvbox-dark-icons-gtk		# gtk gruvbox icons
 	lxappearance			# theme switcher
+	starship			# shell prompt
+	nerd-fonts-source-code-pro	# shell prompt icons
+	ttf-font-awesome		# font icons
+	jq				# json helper
+	wget				# request sending helper
 )
 
 yay -Syu --needed "${pkgs[@]}"
 
 if [[ ! -d "$HOME/Pictures/screenshots" ]]; then
-	mkdir -p "$HOME/Pictures/screenshots"
+	mkdir "$HOME/Pictures/screenshots"
 fi

@@ -4,6 +4,7 @@ configuration {
 	show-icons: true;
 	display-run: "Execute";
 	display-window: "Window";
+	font: "Source Code Pro 11";
 }
 
 * {

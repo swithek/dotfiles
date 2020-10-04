@@ -1,10 +1,10 @@
 export EDITOR=/usr/bin/vim
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
-export QT_QPA_PLATFORMTHEME=gtk2
 export BROWSER=/usr/bin/firefox-developer-edition
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOPATH/bin
 export NNN_OPTS='deR'
 export NNN_FCOLORS='c1e24709006033f7c6d6abc4'
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
 
 # vim:ft=bash
