@@ -12,7 +12,6 @@ pkgs=(
 	picom				# compositor
 	nnn				# terminal file manager
 	adobe-source-code-pro-fonts	# main font
-	volumeicon			# system tray volume control
 	network-manager-applet		# GUI / system tray network manager control
 	udiskie				# disk automounter
 	feh				# image viewer 
@@ -29,6 +28,10 @@ pkgs=(
 	ttf-font-awesome		# font icons
 	jq				# json helper
 	wget				# request sending helper
+	pulseaudio			# sound server
+	pulseaudio-alsa			# sound server integration with alsa
+	pavucontrol			# volume control
+	pasystray			# system tray volume control
 )
 
 yay -Syu --needed "${pkgs[@]}"
