@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 icon_color="#cc241d"
 vpn_conn=$(nmcli c show --active | grep -i vpn)

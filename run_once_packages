@@ -33,10 +33,11 @@ pkgs=(
 	pulseaudio-alsa			# sound server integration with alsa
 	pavucontrol			# volume control
 	pasystray			# system tray volume control
+	pacman-contrib			# pacman helpers
 )
 
 yay -Syu --needed "${pkgs[@]}"
 
 if [[ ! -d "$HOME/Pictures/screenshots" ]]; then
-	mkdir "$HOME/Pictures/screenshots"
+	mkdir -p "$HOME/Pictures/screenshots"
 fi

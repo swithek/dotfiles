@@ -31,7 +31,7 @@ alias grep='grep --colour=auto'
 alias cp='cp -i'
 
 # confirm before deleting something
-alias rm='rm -ri'
+alias rm='rm -r'
 
 # human-readable sizes
 alias df='df -h'                          

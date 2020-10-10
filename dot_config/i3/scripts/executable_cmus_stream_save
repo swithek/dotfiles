@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 name=$(cmus-remote -Q | sed -nE 's/^stream (.+)/\1/p')
 

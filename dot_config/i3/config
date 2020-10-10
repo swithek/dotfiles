@@ -46,10 +46,10 @@ set $term termite
 set $term_dedicated termite --name=termite_dedicated
 set $filemanager termite -e nnn --name=nnn
 set $dotfiles termite -d "$(chezmoi source-path)"
-set $assign $HOME/.config/i3/scripts/assign.sh
-set $cmus_stream_save $HOME/.config/i3/scripts/cmus_stream_save.sh
-set $lock_wallpaper $HOME/.config/i3/scripts/lock_wallpaper.sh
-set $polybar $HOME/.config/polybar/scripts/launch.sh
+set $assign $HOME/.config/i3/scripts/assign
+set $cmus_stream_save $HOME/.config/i3/scripts/cmus_stream_save
+set $lock_wallpaper $HOME/.config/i3/scripts/lock_wallpaper
+set $polybar $HOME/.config/polybar/scripts/launch
 set $locker betterlockscreen -l dimblur -t "The end is nigh."
 set $locker_suspend betterlockscreen -s dimblur -t "The end is nigh."
 set $screenshot scrot '%Y-%m-%d-%H-%M.png' -e 'mv $f ~/Pictures/screenshots/'

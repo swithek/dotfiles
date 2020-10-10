@@ -33,7 +33,6 @@ set termguicolors
 " => Plugins
 "
 """"""""""""""""""""""""""""""""""""""""
-
 " Install vim-plug, if needed.
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -422,11 +421,16 @@ set writebackup
 " Disable swap files creation.
 set noswapfile
 
+" Create undo directory.
+if !isdirectory($HOME.'/.vim/undo')
+    call mkdir($HOME.'/.vim/undo', 'p', 0700)
+endif
+
 " Make Vim store the undo history in a file.
 set undofile
 
 " Set undo file location.
-set undodir=~/.vim_undo//,.
+set undodir=~/.vim/undo
 
 """"""""""""""""""""""""""""""""""""""""
 "

@@ -59,7 +59,7 @@ tray-padding = 1
 
 modules-left = i3 battery dots_modified backlight vpn
 modules-center = date
-modules-right = storage memory cpu temperature
+modules-right = arch_updates storage memory cpu temperature
 
 [module/i3]
 type = internal/i3
@@ -240,13 +240,18 @@ ramp-4-foreground = ${colors.color11}
 
 [module/vpn]
 type = custom/script
-exec = ~/.config/polybar/scripts/vpn.sh --country
-click-left = ~/.config/polybar/scripts/vpn.sh --details
+exec = ~/.config/polybar/scripts/vpn --country
+click-left = ~/.config/polybar/scripts/vpn --details
 interval = 60
 
 [module/dots_modified]
 type = custom/script
-exec = ~/.config/polybar/scripts/modified.sh
+exec = ~/.config/polybar/scripts/modified
 interval = 5
+
+[module/arch_updates]
+type = custom/script
+exec = ~/.config/polybar/scripts/arch_updates
+interval = 600
 
 ; vim:ft=dosini
