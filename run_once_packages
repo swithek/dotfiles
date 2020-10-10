@@ -41,3 +41,7 @@ yay -Syu --needed "${pkgs[@]}"
 if [[ ! -d "$HOME/Pictures/screenshots" ]]; then
 	mkdir -p "$HOME/Pictures/screenshots"
 fi
+
+if [[ ! -f "/etc/udev/rules.d/95-battery.rules" ]]; then
+	sudo cp "$(chezmoi source-path)/.sysconf/95-battery.rules" /etc/udev/rules.d/95-battery.rules
+fi
