@@ -34,6 +34,7 @@ pkgs=(
 	pavucontrol			# volume control
 	pasystray			# system tray volume control
 	pacman-contrib			# pacman helpers
+	tldr				# cmd cheatsheets
 )
 
 yay -Syu --needed "${pkgs[@]}"
