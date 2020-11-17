@@ -35,6 +35,7 @@ pkgs=(
 	pasystray			# system tray volume control
 	pacman-contrib			# pacman helpers
 	tldr				# cmd cheatsheets
+	bash-completion			# completion funcs for bash
 )
 
 yay -Syu --needed "${pkgs[@]}"
