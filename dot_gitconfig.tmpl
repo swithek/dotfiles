@@ -16,10 +16,8 @@
 	whitespace = red reverse
 [diff-so-fancy]
 	markEmptyLines = false
-{{- if eq .machine_type "dev" }}
+{{- if (and (ne .git_global_name "") (ne .git_global_email "")) }}
 [user]
-	{{$git_global_name := promptString "git_global_name" -}}
 	name = "{{ $git_global_name }}"
-	{{$git_global_email := promptString "git_global_email" -}}
 	email = "{{ $git_global_email }}"
 {{- end }}

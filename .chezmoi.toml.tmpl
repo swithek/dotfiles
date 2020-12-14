@@ -5,5 +5,9 @@ sourceDir = "{{ .chezmoi.sourceDir }}"
 	pager = "diff-so-fancy"
 
 {{$machine_type := promptString "machine_type" -}}
+{{$git_global_name := promptString "git_global_name" -}}
+{{$git_global_email := promptString "git_global_email" -}}
 [data]
 	machine_type = "{{ $machine_type }}"
+	git_global_name = "{{ $git_global_name }}"
+	git_global_email = "{{ $git_global_email }}"
