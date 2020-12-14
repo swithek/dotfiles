@@ -18,6 +18,6 @@
 	markEmptyLines = false
 {{- if (and (ne .git_global_name "") (ne .git_global_email "")) }}
 [user]
-	name = "{{ $git_global_name }}"
-	email = "{{ $git_global_email }}"
+	name = "{{ .git_global_name }}"
+	email = "{{ .git_global_email }}"
 {{- end }}
