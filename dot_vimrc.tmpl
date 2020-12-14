@@ -63,7 +63,7 @@ Plug 'cespare/vim-toml'
 Plug 'scrooloose/nerdcommenter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 Plug 'SirVer/ultisnips'
-{{- if eq .machine_type "personal" }}
+{{- if eq .machine_type "home" }}
 
 """"""""""""""""""""""""""""""""""""""
 " => Writing (prose, etc.) plugins
@@ -236,7 +236,7 @@ nnoremap <leader>s :UltiSnipsEdit<cr>
 """"""""""""""""""""""""""""""""""""""
 
 let g:lexical#spelllang = ['en_gb']
-{{- if eq .machine_type "personal" }}
+{{- if eq .machine_type "home" }}
 
 """"""""""""""""""""""""""""""""""""""""
 "

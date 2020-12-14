@@ -1,0 +1,3 @@
+Machine types:
+- home
+- dev
