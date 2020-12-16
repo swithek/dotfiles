@@ -1,25 +1,28 @@
 #!/bin/bash
 
-icon_color="#cc241d"
-vpn_conn=$(nmcli c show --active | grep -i vpn)
-if [ -n "$vpn_conn" ]; then
-	icon_color="#b8bb26"
-fi
+if [ "$1" == '--notify' ]; then
+	info="$(mullvad status -l)"
+	ipv4="$(echo "${info}" | sed -nE 's/^IPv4:\ ([.0-9]+)/\1/p')"
+	loc="$(echo "${info}" | sed -nE 's/^Location:\ ([,a-zA-Z]+)/\1/p')"
 
-info=""
-ip_data=($(wget -qO - ifconfig.co/json | jq -r '.ip, .country'))
-if [ -z "$1" ] || [ "$1" == '--ip' ]; then 
-	info=${ip_data[0]}
-elif [ "$1" == "--country" ]; then 
-	info=${ip_data[*]:1}
-elif [ "$1" == "--details" ]; then
-	details="IP: ${ip_data[0]}\nCountry: ${ip_data[*]:1}"
-	notify-send -t 3000 "VPN details" "$details"
+	msg="IP: ${ipv4}\nLocation: ${loc}"
+	notify-send -t 3000 "VPN" "$msg"
 	exit
 fi
 
-if [ -z "$info" ]; then
-	info="[TBD]"
-fi
+while read vpn_event; do
+	info="$(mullvad status -l)"
+	loc="$(echo "${info}" | sed -nE 's/^Location:\ [a-zA-Z]+, ([a-zA-Z]+)/\1/p')"
+	icon_color='#cc241d'
+	
+	if echo "${vpn_event}" | grep -Eq 'Tunnel status:.+[Cc]onnecting'; then
+		continue
+	fi
 
-echo %{F$icon_color}%{F-} "$info"
+	if echo "${vpn_event}" | grep -Eq 'Tunnel status: Connected'; then
+		icon_color='#b8bb26'
+	fi
+
+	echo %{F$icon_color}%{F-} "${loc}"
+done < <(mullvad status listen)
+

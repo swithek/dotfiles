@@ -27,7 +27,6 @@ pkgs=(
 	nerd-fonts-source-code-pro	# shell prompt icons
 	ttf-font-awesome		# font icons
 	noto-fonts-emoji		# emoji font
-	jq				# json helper
 	wget				# request sending helper
 	pulseaudio			# sound server
 	pulseaudio-alsa			# sound server integration with alsa
