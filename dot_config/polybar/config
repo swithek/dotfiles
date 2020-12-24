@@ -29,9 +29,9 @@ format-background = ${colors.background}
 margin-top = 0
 margin-bottom = 0
 
-[bar/top]
+[bar/primary]
 enable-ipc = true
-monitor = eDP-1
+monitor = ${env:MONITOR:}
 width = 100%
 height = 32
 fixed-center = true
@@ -61,17 +61,52 @@ modules-left = i3 battery backlight dots_modified arch_updates vpn
 modules-center = date
 modules-right = pulseaudio storage memory cpu temperature
 
+[bar/aux]
+enable-ipc = true
+monitor = ${env:MONITOR:}
+width = 100%
+height = 32
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+border-bottom-size = 1
+border-color = ${colors.color11}
+
+padding-right = 1
+
+module-margin-left = 1
+module-margin-right = 1
+separator = |
+
+font-0 = Source Code Pro:style=Medium:size=11;1
+font-1 = Font Awesome 5 Free:style=Solid:size=11;1
+
+tray-position = none
+
+modules-left = i3 
+modules-center = date
+modules-right = monitor
+
+[module/monitor]
+type = custom/script
+exec = echo "$MONITOR"
+interval = 5
+
 [module/i3]
 type = internal/i3
 index-sort = true
 pin-workspaces = true
+strip-wsnumbers = true
 
-ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5;
-ws-icon-5 = 6;
+ws-icon-0 = 0;
+ws-icon-1 = 1;
+ws-icon-2 = 2;
+ws-icon-3 = 3;
+ws-icon-4 = 4;
+ws-icon-5 = 5;
+ws-icon-6 = 6;
 ws-icon-default = 
 
 label-mode-padding = 1

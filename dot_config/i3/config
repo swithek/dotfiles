@@ -12,6 +12,7 @@ set $up k
 set $down j
 
 # Workspace numbers.
+set $ws_catch_all 0
 set $ws1 1
 set $ws2 2
 set $ws3 3
@@ -128,8 +129,8 @@ bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
 
-# Focus the parent container.
-bindsym $mod+a focus parent
+# Focus the parent/outer container.
+bindsym $mod+o focus parent
 
 # Move focused window.
 bindsym $mod+Shift+$left move left
@@ -161,6 +162,7 @@ bindsym $mod+Ctrl+$left workspace prev
 bindsym $mod+Ctrl+$right workspace next
 
 # Switch to workspace.
+bindsym $mod+a workspace $ws_catch_all
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -171,6 +173,7 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 
 # Move to workspace with focused container.
+bindsym $mod+Shift+a move container to workspace $ws_catch_all; workspace $ws_catch_all
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
@@ -179,9 +182,6 @@ bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
-
-# Move to catch-all workspace with focused window.
-bindsym $mod+Shift+a move container to workspace $ws8; workspace $ws8
 
 # Lock screen.
 bindsym $mod+9 exec --no-startup-id exec $locker
@@ -231,8 +231,11 @@ bindsym $mod+grave mode "assign"
 # Activate system session management mode.
 bindsym $mod+0 mode "$mode_system"
 
-# Activate focused window resize mode.
+# Activate focused container resize mode.
 bindsym $mod+r mode "resize"
+
+# Activate monitor management mode.
+bindsym $mod+p mode "monitor"
 
 ##################
 ## Custom modes ##
@@ -241,6 +244,7 @@ bindsym $mod+r mode "resize"
 # Move and assign focused window (modifies config file).
 mode "assign" {
 	# Move to workspace with focused container.
+	bindsym $mod+a exec $assign $ws_catch_all; move container to workspace $ws_catch_all; workspace $ws_catch_all; reload; restart
 	bindsym $mod+1 exec $assign $ws1; move container to workspace $ws1; workspace $ws1; reload; restart
 	bindsym $mod+2 exec $assign $ws2; move container to workspace $ws2; workspace $ws2; reload; restart
 	bindsym $mod+3 exec $assign $ws3; move container to workspace $ws3; workspace $ws3; reload; restart
@@ -249,9 +253,6 @@ mode "assign" {
 	bindsym $mod+6 exec $assign $ws6; move container to workspace $ws6; workspace $ws6; reload; restart
 	bindsym $mod+7 exec $assign $ws7; move container to workspace $ws7; workspace $ws7; reload; restart
 	bindsym $mod+8 exec $assign $ws8; move container to workspace $ws8; workspace $ws8; reload; restart
-
-	# Move to catch-all workspace with focused window.
-	bindsym $mod+a exec $assign $ws8; move container to workspace $ws8; workspace $ws8; reload; restart
 	
 	# Exit window assign mode.
 	bindsym Return mode "default"
@@ -272,24 +273,82 @@ mode "$mode_system" {
 	bindsym Escape mode "default"
 }
 
-# Resize focused window.
+# Resize focused container.
 mode "resize" {
-	# Shrink window's width.
+	# Shrink container's width.
 	bindsym $left resize shrink width 5 px or 5 ppt
 	
-	# Increase window's height.
+	# Increase container's height.
 	bindsym $up Resize grow height 5 px or 5 ppt
 
-	# Shrink window's height.
+	# Shrink container's height.
 	bindsym $down resize shrink height 5 px or 5 ppt
 
-	# Increase window's width.
+	# Increase container's width.
 	bindsym $right resize grow width 5 px or 5 ppt
 
-	# Exit focused window resize mode.
+	# Exit focused container resize mode.
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
+
+# Move workspaces / containers between different monitors.
+mode "monitor" {
+	# container
+	
+	# Move container to the monitor on the left.
+	bindsym $left move container to output left
+
+	# Move container to the monitor on the right.
+	bindsym $right move container to output right
+
+	# Move container to the monitor above.
+	bindsym $up move container to output up
+
+	# Move container to the monitor below.
+	bindsym $down move container to output down
+
+	# Move container to the monitor below.
+	bindsym $down move container to output down
+
+	# Move container to the primary monitor.
+	bindsym p move container to output primary
+
+	# workspace
+
+	# Move workspace to the monitor on the left.
+	bindsym Shift+$left move workspace to output left
+
+	# Move workspace to the monitor on the right.
+	bindsym Shift+$right move workspace to output right
+
+	# Move workspace to the monitor above.
+	bindsym Shift+$up move workspace to output up
+
+	# Move workspace to the monitor below.
+	bindsym Shift+$down move workspace to output down
+
+	# Move container to the primary monitor.
+	bindsym Shift+p move workspace to output primary
+
+	# Exit focused container resize mode.
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+
+##########################
+## Workspace management ##
+##########################
+
+workspace $ws_catch_all output primary
+workspace $ws1 output primary
+workspace $ws2 output primary
+workspace $ws3 output primary
+workspace $ws4 output primary
+workspace $ws5 output primary
+workspace $ws6 output primary
+
 
 #######################
 ## Window management ##
