@@ -125,6 +125,10 @@ label-urgent = %icon%
 label-urgent-background = ${colors.color9}
 label-urgent-padding = 2
 
+label-visible = %icon%
+label-visible-foreground = ${colors.color2}
+label-visible-padding = 2
+
 label-separator = |
 label-separator-foreground = ${colors.color3}
 
