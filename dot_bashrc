@@ -39,4 +39,7 @@ alias df='df -h'
 # show sizes in MB
 alias free='free -m'                      
 
+# download audio from youtube
+alias ytaudio='youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0'
+
 # vim:ft=bash

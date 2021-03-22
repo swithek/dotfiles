@@ -35,6 +35,7 @@ pkgs=(
 	pacman-contrib			# pacman helpers
 	tldr				# cmd cheatsheets
 	bash-completion			# completion funcs for bash
+	youtube-dl			# youtube downloader
 )
 
 yay -Syu --needed "${pkgs[@]}"
