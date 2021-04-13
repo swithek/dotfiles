@@ -137,9 +137,6 @@ nnoremap <silent> <leader>x :Limelight!!<cr>
 " => vim-go
 """"""""""""""""""""""""""""""""""""""
 
-" Command to run during formatting.
-let g:go_fmt_command = "goimports"
-
 " Get signature / type info under the cursor.
 let g:go_auto_type_info = 1
 
@@ -155,22 +152,25 @@ let g:go_auto_sameids = 1
 " Run extended linter on save.
 let g:go_metalinter_autosave = 1
 
+" Command to run when checking code quality.
+let g:go_metalinter_command = "golangci-lint"
+
 " Command to run when :GoAlternate is used.
 let g:go_alternate_mode = "vsplit"
 
 " Show documentation in a popup window.
 let g:go_doc_popup_window = 1
 
-" Command to run when checking what interfaces are implemented.
-let g:go_implements_mode = "gopls"
+" Initial value of :GoRename.
+let g:go_gorename_prefill = ""
 
-" Command to run when renaming.
-let g:go_rename_command = "gopls"
-
-" Don't add tags on unexported fields.
+" Don't add tags to unexported fields.
 let g:go_addtags_skip_unexported = 1
 
-" Various syntax objects highlighting.
+" Jump to an existing buffer when using :GoDef.
+let g:go_def_reuse_buffer = 1
+
+" Highlighting of various syntax objects.
 let g:go_highlight_generate_tags = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_function_calls = 1
@@ -178,23 +178,56 @@ let g:go_highlight_function_parameters = 1
 let g:go_highlight_variable_declarations = 1
 let g:go_highlight_variable_assignments = 1
 
+" Debug windows layout.
+let g:go_debug_windows = {
+	\ 'vars':       'botright 15new',
+	\ 'goroutines': 'leftabove vnew',
+	\ 'stack':      'botright 5new',
+\ }
+
+" Debug key mappings.
+let g:go_debug_mappings = {
+	\ '(go-debug-continue)':   {'key': 'dc'},                               
+	\ '(go-debug-print)':      {'key': 'dp'},                               
+	\ '(go-debug-breakpoint)': {'key': 'db'},                               
+	\ '(go-debug-next)':       {'key': 'dn'},                              
+	\ '(go-debug-step)':       {'key': 'ds'},                              
+	\ '(go-debug-stepout)':    {'key': 'do'},
+	\ '(go-debug-halt)':       {'key': 'dh'},
+\ }
+
+" Debug breakpoint line sign.
+let g:go_debug_breakpoint_sign_text = '@'
+
 augroup gobindings
 	autocmd! gobindings
+
+	" Start the debug mode.
+	autocmd FileType go nnoremap <buffer> <leader>ds :GoDebugStart<cr>
+
+	" Start the debug test mode.
+	autocmd FileType go nnoremap <buffer> <leader>dtt :GoDebugTest<cr>
+
+	" Start the debug test mode for the test under the cursor.
+	autocmd FileType go nnoremap <buffer> <leader>dtf :GoDebugTestFunc<cr>
+
+	" Stop the debug mode.
+	autocmd FileType go nmap <buffer> <leader>dq <Plug>(go-debug-stop)
+
+	" Add debug breakpoint.
+	autocmd FileType go nnoremap <buffer> <leader>db :GoDebugBreakpoint<cr>
 
 	" Generate interface implementation stub on type under the cursor.
 	autocmd FileType go nnoremap <buffer> <leader>i :GoImpl<cr>
 
 	" Show what interfaces are implemented by the type under the cursor.
-	autocmd FileType go nnoremap <buffer> <leader>w :GoImplements<cr>
+	autocmd FileType go nmap <buffer> <leader>w <Plug>(go-implements)
 
 	" Show all use places of selected identifier.
-	autocmd FileType go nnoremap <buffer> <leader>f :GoReferrers<cr>
+	autocmd FileType go nmap <buffer> <leader>f <Plug>(go-referrers)
 
 	" Rename object under the cursor.
-	autocmd FileType go nnoremap <buffer> <leader>r :GoRename<cr>
-
-	" Show selected syntax piece info.
-	autocmd FileType go nnoremap <buffer> <leader>d :GoDescribe<cr>
+	autocmd FileType go nmap <buffer> <leader>r <Plug>(go-rename)
 
 	" Go to alternate file.
 	autocmd FileType go nnoremap <buffer> <leader>a :GoAlternate!<cr>
@@ -206,13 +239,16 @@ augroup gobindings
 	autocmd FileType go nnoremap <buffer> <leader>tg :GoAddTags<cr>
 
 	" Run all package tests.
-	autocmd FileType go nmap <buffer> <leader>t <Plug>(go-test)
+	autocmd FileType go nmap <buffer> <leader>tt <Plug>(go-test)
 
 	" Run only the test that is under the cursor.
 	autocmd FileType go nmap <buffer> <leader>tf <Plug>(go-test-func)
 
 	" Toggle code coverage.
 	autocmd FileType go nmap <buffer> <leader>k <Plug>(go-coverage-toggle)
+
+	" Fill a struct under the cursor.
+	autocmd FileType go nnoremap <buffer> <leader>sf :GoFillStruct<cr>
 augroup end
 
 """"""""""""""""""""""""""""""""""""""
