@@ -158,8 +158,8 @@ bindsym $mod+y border pixel 1
 bindsym $mod+Shift+s sticky toggle
 
 # Navigate workspaces next / previous.
-bindsym $mod+Ctrl+$left workspace prev
-bindsym $mod+Ctrl+$right workspace next
+bindsym $mod+Ctrl+$left workspace prev_on_output
+bindsym $mod+Ctrl+$right workspace next_on_output
 
 # Switch to workspace.
 bindsym $mod+a workspace $ws_catch_all
