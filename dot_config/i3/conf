@@ -22,7 +22,7 @@ set $ws6 6
 set $ws7 7
 set $ws8 8
 
-# Colour palette used by the terminal (~/.Xresources file).
+# System colour palette (~/.Xresources file).
 set_from_resource $term_background background
 set_from_resource $term_foreground foreground
 set_from_resource $term_color0     color0
@@ -43,10 +43,10 @@ set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
 # Custom commands
-set $term termite
-set $term_dedicated termite --name=termite_dedicated
-set $filemanager termite -e nnn --name=nnn
-set $dotfiles termite -d "$(chezmoi source-path)"
+set $term alacritty
+set $term_dedicated alacritty --class alacritty_dedicated
+set $filemanager alacritty --class nnn -e nnn
+set $dotfiles alacritty --working-directory "$(chezmoi source-path)"
 set $assign $HOME/.config/i3/scripts/assign
 set $cmus_stream_save $HOME/.config/i3/scripts/cmus_stream_save
 set $lock_wallpaper $HOME/.config/i3/scripts/lock_wallpaper
@@ -214,10 +214,10 @@ bindsym $mod+g exec $filemanager
 bindsym $mod+d exec --no-startup-id rofi -show run
 
 # Open WeeChat.
-#bindsym $mod+c exec $term -e weechat --name=weechat
+#bindsym $mod+c exec $term --class weechat -e weechat
 
 # Open cmus.
-bindsym $mod+m exec $term -e cmus --name=cmus
+bindsym $mod+m exec $term --class cmus -e cmus
 
 # Toggle music player state.
 bindsym $mod+z exec cmus-remote -u
@@ -361,11 +361,11 @@ for_window [class = "Spotify"] move to workspace $ws4
 assign [class="FreeTube" instance="freetube"] $ws5
 assign [class="Steam" instance="Steam"] $ws6
 assign [class="Spotify" instance="spotify"] $ws4
-assign [class="Termite" instance="termite_dedicated"] $ws1
+assign [class="Alacritty" instance="alacritty_dedicated"] $ws1
 assign [class="discord" instance="discord"] $ws2
 assign [class="TelegramDesktop" instance="telegram-desktop"] $ws2
-assign [class="Termite" instance="cmus"] $ws4
-assign [class="Termite" instance="weechat"] $ws2
+assign [class="Alacritty" instance="cmus"] $ws4
+assign [class="Alacritty" instance="weechat"] $ws2
 assign [class="Pychess" instance="pychess"] $ws6
 assign [class="vlc" instance="vlc"] $ws5
 assign [class="Audacious" instance="audacious"] $ws4

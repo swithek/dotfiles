@@ -8,7 +8,7 @@ pkgs=(
 	polybar				# status bar
 	cmus				# music player
 	rofi				# dmenu replacement
-	termite				# terminal emulator
+	alacritty			# terminal emulator
 	picom				# compositor
 	nnn				# terminal file manager
 	adobe-source-code-pro-fonts	# main font
