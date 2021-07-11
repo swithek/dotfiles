@@ -21,3 +21,6 @@ format = "using [Kotlin ($version )]($style)"
 
 [rust]
 format = "using [Rust ($version )]($style)"
+
+[nodejs]
+format = "using [Node ($version )]($style)"
