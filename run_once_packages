@@ -36,6 +36,8 @@ pkgs=(
 	tldr				# cmd cheatsheets
 	bash-completion			# completion funcs for bash
 	youtube-dl			# youtube downloader
+	httpie				# http client
+	websocat			# websocket client
 )
 
 yay -Syu --needed "${pkgs[@]}"
