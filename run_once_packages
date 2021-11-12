@@ -18,7 +18,6 @@ pkgs=(
 	betterlockscreen		# screen locker
 	scrot				# screenshot utility
 	xautolock			# automatic locking utility
-	cbatticon			# battery system tray icon
 	diff-so-fancy			# diff pager
 	gruvbox-dark-gtk		# gtk gruvbox theme
 	gruvbox-dark-icons-gtk		# gtk gruvbox icons
@@ -31,7 +30,6 @@ pkgs=(
 	pulseaudio			# sound server
 	pulseaudio-alsa			# sound server integration with alsa
 	pavucontrol			# volume control
-	pasystray			# system tray volume control
 	pacman-contrib			# pacman helpers
 	tldr				# cmd cheatsheets
 	bash-completion			# completion funcs for bash
