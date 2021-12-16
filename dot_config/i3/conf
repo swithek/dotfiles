@@ -148,6 +148,9 @@ bindsym $mod+Shift+space floating toggle
 # Change focus between tiling / floating windows.
 bindsym $mod+space focus mode_toggle
 
+# Toggle sticky floating mode.
+bindsym $mod+Ctrl+space sticky toggle
+
 # Change borders.
 bindsym $mod+u border none
 bindsym $mod+y border pixel 1
