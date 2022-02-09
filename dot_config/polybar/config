@@ -50,7 +50,7 @@ module-margin-right = 1
 separator = |
 
 font-0 = Source Code Pro:style=Medium:size=11;1
-font-1 = Font Awesome 5 Free:style=Solid:size=11;1
+font-1 = Font Awesome 6 Free:style=Solid:size=11;1
 
 tray-position = right
 tray-maxsize = 16
@@ -81,7 +81,7 @@ module-margin-right = 1
 separator = |
 
 font-0 = Source Code Pro:style=Medium:size=11;1
-font-1 = Font Awesome 5 Free:style=Solid:size=11;1
+font-1 = Font Awesome 6 Free:style=Solid:size=11;1
 
 tray-position = none
 
