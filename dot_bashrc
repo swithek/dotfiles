@@ -25,7 +25,6 @@ ex () {
 
 # enable colours
 alias ls='ls --color=auto -FAhl'
-alias grep='grep --colour=auto'
 
 # confirm before overwriting something
 alias cp='cp -i'
@@ -41,5 +40,8 @@ alias free='free -m'
 
 # download audio from youtube
 alias ytaudio='youtube-dl -i --extract-audio --audio-format mp3 --audio-quality 0'
+
+# exclude noise
+alias grep='grep --colour=auto --exclude-dir .git --exclude-dir vendor'
 
 # vim:ft=bash
