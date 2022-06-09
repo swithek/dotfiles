@@ -5,7 +5,7 @@
 """"""""""""""""""""""""""""""""""""""""
 
 " Define a leader key.
-let mapleader = ","
+let mapleader = ','
 
 " Make Vim behave in a more useful way (non Vi-compatible).
 set nocompatible
@@ -62,6 +62,8 @@ Plug 'cespare/vim-toml'
 """"""""""""""""""""""""""""""""""""""
 Plug 'scrooloose/nerdcommenter'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'Yggdroot/indentLine'
 Plug 'SirVer/ultisnips'
 {{- if eq .machine_type "home" }}
 
@@ -144,22 +146,22 @@ let g:go_auto_type_info = 1
 let g:go_test_show_name = 1
 
 " Set test timeout.
-let g:go_test_timeout = "30s"
+let g:go_test_timeout = '30s'
 
 " Run extended linter on save.
 let g:go_metalinter_autosave = 1
 
 " Command to run when checking code quality.
-let g:go_metalinter_command = "golangci-lint"
+let g:go_metalinter_command = 'golangci-lint'
 
 " Command to run when :GoAlternate is used.
-let g:go_alternate_mode = "vsplit"
+let g:go_alternate_mode = 'vsplit'
 
 " Show documentation in a popup window.
 let g:go_doc_popup_window = 1
 
 " Initial value of :GoRename.
-let g:go_gorename_prefill = ""
+let g:go_gorename_prefill = ''
 
 " Don't add tags to unexported fields.
 let g:go_addtags_skip_unexported = 1
@@ -220,7 +222,7 @@ augroup gobindings
 	" Show what interfaces are implemented by the type under the cursor.
 	autocmd FileType go nmap <buffer> <leader>w <Plug>(go-implements)
 
-	" Show all use places of selected identifier.
+	" Show all use places of the selected identifier.
 	autocmd FileType go nmap <buffer> <leader>f <Plug>(go-referrers)
 
 	" Rename object under the cursor.
@@ -249,17 +251,47 @@ augroup gobindings
 augroup end
 
 """"""""""""""""""""""""""""""""""""""
+" => jedi-vim 
+""""""""""""""""""""""""""""""""""""""
+
+" Don't start completion when a dot is added.
+let g:jedi#popup_on_dot = 0
+
+" How long to wait before updating the function signature.
+let g:jedi#show_call_signatures_delay = 100 " milliseconds
+
+" Various keybindings
+let g:jedi#goto_command = 'gd'
+let g:jedi#goto_assignments_command = ''
+let g:jedi#goto_stubs_command = ''
+let g:jedi#documentation_command = 'K'
+let g:jedi#usages_command = '<leader>f'
+let g:jedi#completions_command = '<C-Space>'
+let g:jedi#rename_command = '<leader>r'
+
+""""""""""""""""""""""""""""""""""""""
+" => indentLine (for space indentation)
+""""""""""""""""""""""""""""""""""""""
+
+" Don't use the plugin's conceal/colour options.
+let g:indentLine_setConceal = 0
+
+" Use the same character as the one used for leading spaces in listchars.
+" This character is always highlighted.
+let g:indentLine_char = '~'
+
+""""""""""""""""""""""""""""""""""""""
 " => ultisnips
 """"""""""""""""""""""""""""""""""""""
 
 " Jump to next tabstop.
-let g:UltiSnipsJumpForwardTrigger="<c-s-k>"
+let g:UltiSnipsJumpForwardTrigger='<c-s-k>'
 
 " Jump to previous tabstop.
-let g:UltiSnipsJumpBackwardTrigger="<c-s-j>"
+let g:UltiSnipsJumpBackwardTrigger='<c-s-j>'
 
 " Split veritically when editing snippets.
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEditSplit='vertical'
 
 " Start editing snippets of the active file filetype.
 nnoremap <leader>s :UltiSnipsEdit<cr>
@@ -349,17 +381,9 @@ set foldmethod=syntax
 " Show line numbers.
 set number
 
-" Bring love and joy into the world.
-set noexpandtab
-
-" Width of the TAB character.
-set tabstop=8
-set shiftwidth=8
-set softtabstop=8
-
-" Display TAB as characters.
-set list 
-set listchars=tab:>·
+" Display tabs and leading/trailing spaces as characters.
+set list
+set listchars=tab:>·,lead:~,trail:<
 
 " Show possible options when typing in command-line and pressing TAB.
 set wildmenu
@@ -407,6 +431,35 @@ set encoding=utf-8
 
 " Enable syntax highlighting.
 syntax enable
+
+" Call UseTabs to activate proper tab mode,
+" bringing love and joy into the world.
+fun! UseTabs()
+	set noexpandtab
+	set tabstop=8
+	set shiftwidth=8
+	set softtabstop=8
+endf
+
+" Activate tab mode manually.
+command! -nargs=0 UseTabs call UseTabs()
+
+" Activate tabs for all files.
+autocmd FileType * call UseTabs()
+
+" Call UseSpaces to activate space tab mode. 
+fun! UseSpaces()
+	set expandtab
+	set tabstop=4
+	set shiftwidth=4
+	set softtabstop=4
+endf
+
+" Activate space tab mode manually.
+command! -nargs=0 UseSpaces call UseSpaces()
+
+" Activate space tabs only for python files.
+autocmd FileType python call UseSpaces()
 
 " Call LightsOut to activate dark theme settings.
 fun! LightsOut()
