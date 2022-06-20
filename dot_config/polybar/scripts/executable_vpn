@@ -1,9 +1,13 @@
 #!/bin/bash
 
-if [ "$1" == '--notify' ]; then
+if [[ "$1" == '--notify' ]]; then
 	info="$(mullvad status -l)"
 	ipv4="$(echo "${info}" | sed -nE 's/^IPv4:\ ([.0-9]+)/\1/p')"
-	loc="$(echo "${info}" | sed -nE 's/^Location:\ ([,a-zA-Z]+)/\1/p')"
+	loc="$(echo "${info}" | sed -nE 's/^Connected\ to\ [a-zA-Z0-9-]+\ in\ (.+)/\1/p')"
+
+	if [[ -z "${loc}" ]]; then
+		loc="Unknown"
+	fi
 
 	msg="IP: ${ipv4}\nLocation: ${loc}"
 	notify-send -t 3000 "VPN" "$msg"
@@ -12,14 +16,18 @@ fi
 
 while read vpn_event; do
 	info="$(mullvad status -l)"
-	loc="$(echo "${info}" | sed -nE 's/^Location:\ [a-zA-Z]+, ([a-zA-Z]+)/\1/p')"
+	loc="$(echo "${info}" | sed -nE 's/^Connected\ to\ [a-zA-Z0-9-]+\ in\ [a-zA-Z0-9]+,\ (.+)/\1/p')"
 	icon_color='#cc241d'
+
+	if [[ -z "${loc}" ]]; then
+		loc="Unknown"
+	fi
 	
-	if echo "${vpn_event}" | grep -Eq 'Tunnel status:.+[Cc]onnecting'; then
+	if echo "${vpn_event}" | grep -Eq 'Connecting'; then
 		continue
 	fi
 
-	if echo "${vpn_event}" | grep -Eq 'Tunnel status: Connected'; then
+	if echo "${vpn_event}" | grep -Eq 'Connected'; then
 		icon_color='#b8bb26'
 	fi
 
