@@ -36,6 +36,7 @@ pkgs=(
 	youtube-dl			# youtube downloader
 	httpie				# http client
 	websocat			# websocket client
+	bottom				# process monitor
 )
 
 yay -Syu --needed "${pkgs[@]}"
