@@ -1,0 +1,25 @@
+local M = {}
+
+-- plug installs plugins of all environments.
+function M.plug()
+	return {
+		{{- if (or (eq .env_type "full") (eq .env_type "dev")) }}
+		dev = require("dev.plugin_install"),
+		{{- end }}
+		{{- if (or (eq .env_type "full") (eq .env_type "text")) }}
+		text = require("text.plugin_install"),
+		{{- end }}
+	}
+end
+
+-- setup prepares all environments and their options.
+function M.setup()
+	{{- if (or (eq .env_type "full") (eq .env_type "dev")) }}
+	require("dev.config")
+	{{- end }}
+	{{- if (or (eq .env_type "full") (eq .env_type "text")) }}
+	require("text.config")
+	{{- end }}
+end
+
+return M

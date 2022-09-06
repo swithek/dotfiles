@@ -1,13 +1,10 @@
-sourceDir = "{{ .chezmoi.sourceDir }}"
-
 [diff]
-	format = "git"
-	pager = "diff-so-fancy"
+pager = "diff-so-fancy"
 
-{{$machine_type := promptString "machine_type" -}}
-{{$git_global_name := promptString "git_global_name" -}}
-{{$git_global_email := promptString "git_global_email" -}}
+{{$env_type := promptStringOnce . "env_type" "Enter the target environment type (full, dev, text):" -}}
+{{$git_global_name := promptStringOnce . "git_global_name" "Enter the global git name (can be empty):" -}}
+{{$git_global_email := promptStringOnce . "git_global_email" "Enter the global git email (can be empty):" -}}
 [data]
-	machine_type = "{{ $machine_type }}"
-	git_global_name = "{{ $git_global_name }}"
-	git_global_email = "{{ $git_global_email }}"
+env_type = "{{ $env_type }}"
+git_global_name = "{{ $git_global_name }}"
+git_global_email = "{{ $git_global_email }}"

@@ -1,2 +1,18 @@
-README.md
+# README files are used only for documentation and should remain only
+# in this directory.
+**/README.md
+
+# A symlink is created to this file.
 .config/i3/conf
+
+{{- if eq .chezmoi.os "darwin" }}
+**
+
+# Ignore everything on darwin except the following files:
+!.chezmoiscripts/** # for some reason chezmoi ignores this
+!.gitconfig
+!.config/
+!.config/alacritty/**
+!.config/nvim/**
+!.config/starship.toml
+{{- end }}

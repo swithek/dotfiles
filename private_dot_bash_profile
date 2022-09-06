@@ -1,0 +1,11 @@
+export VISUAL=/usr/bin/nvim
+export EDITOR=/usr/bin/nvim
+export BROWSER=/usr/bin/firefox-developer-edition
+export GOPATH=$HOME/.go
+export PATH=$PATH:$GOPATH/bin
+export NNN_OPTS='deR'
+export NNN_FCOLORS='c1e24709006033f7c6d6abc4'
+
+eval "$(ssh-agent -s)" > /dev/null
+
+# vim:ft=bash

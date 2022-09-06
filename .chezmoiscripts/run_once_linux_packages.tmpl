@@ -1,0 +1,62 @@
+{{- if eq .chezmoi.os "linux" }}
+#!/bin/bash
+
+pkgs=(
+	neovim                          # editor
+	dunst                           # notification manager
+	i3-wm                           # tilling window manager
+	polybar                         # status bar
+	rofi                            # dmenu replacement
+	alacritty                       # terminal emulator
+	picom                           # compositor
+	nnn                             # terminal file manager
+	adobe-source-code-pro-fonts     # main font
+	network-manager-applet          # system tray network manager
+	udiskie                         # disk automounter
+	feh                             # image viewer
+	betterlockscreen                # screen locker
+	scrot                           # screenshot utility
+	xautolock                       # automatic locking utility
+	diff-so-fancy                   # diff pager
+	gruvbox-dark-gtk                # gtk gruvbox theme
+	gruvbox-dark-icons-gtk          # gtk gruvbox icons
+	lxappearance                    # theme switcher
+	starship                        # shell prompt
+	nerd-fonts-source-code-pro      # font icons (starship)
+	ttf-font-awesome                # font icons (polybar)
+	noto-fonts-emoji                # emoji font icons (starship)
+	wget                            # request sending helper
+	pulseaudio                      # sound server
+	pulseaudio-alsa                 # sound server integration with alsa
+	pavucontrol                     # volume control
+	pacman-contrib                  # pacman helpers
+	tldr                            # cmd cheatsheets
+	bash-completion                 # completion funcs for bash
+	youtube-dl                      # youtube downloader
+	httpie                          # http client
+	websocat                        # websocket client
+	bottom                          # process monitor
+)
+
+# yay's --needed doesn't fully work: https://github.com/Jguer/yay/issues/885#issuecomment-576544146
+pkgs=($(yay -Qi "${pkgs[@]}" 2>&1 | \
+	grep -E "error: package '.+' was not found" | \
+	cut -d "'" -f 2 | \
+	tr "\n" " ")
+)
+
+if (( ${#pkgs[@]} > 0 )); then
+	echo "Installing packages..."
+	yay -S "${pkgs[@]}"
+fi
+
+if [[ ! -d "$HOME/Pictures/screenshots" ]]; then
+	echo "Creating a directory for screenshots..."
+	mkdir -p "$HOME/Pictures/screenshots"
+fi
+
+if [[ ! -f "/etc/udev/rules.d/95-battery.rules" ]]; then
+	echo "Copying dual battery rules (sudo)..."
+	sudo cp "$(chezmoi source-path)/system/95-battery.rules" /etc/udev/rules.d/95-battery.rules
+fi
+{{- end }}
