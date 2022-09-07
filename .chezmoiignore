@@ -2,10 +2,13 @@
 # in this directory.
 **/README.md
 
-# A symlink is created to this file.
+# A symlink is created to this file (linux only).
 .config/i3/conf
 
-{{- if eq .chezmoi.os "darwin" }}
+# This directory contains configuration files for global/system dependencies.
+system/
+
+{{if eq .chezmoi.os "darwin" -}}
 **
 
 # Ignore everything on darwin except the following files:
