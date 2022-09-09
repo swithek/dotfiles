@@ -23,20 +23,20 @@ scrolling:
 font:
   # Normal (roman) font face.
   normal:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
     style: Medium
 
   # Bold font face.
   bold:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
 
   # Italic font face.
   italic:
-    family: Source Code Pro
+    family: SauceCodePro Nerd Font
 
   # Bold italic font face.
   bold_italic:
-    family: Source Code pro
+    family: SauceCodePro Nerd Font
     style: Medium Italic
 
   # Point size.

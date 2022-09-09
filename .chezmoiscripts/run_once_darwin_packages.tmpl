@@ -8,6 +8,8 @@ brew bundle --no-lock --file=/dev/stdin <<-EOF
 	tap "homebrew/cask-fonts"    # needed to install font packages
 
 	brew "subversion"     # version control system, mainly used to install some of the other packages below
+	brew "go"             # go
+	brew "node"           # node.js
 	brew "neovim"         # editor
 	brew "starship"       # shell prompt
 	brew "tldr"           # command cheatsheets
@@ -15,15 +17,11 @@ brew bundle --no-lock --file=/dev/stdin <<-EOF
 	brew "websocat"       # websocket client
 	brew "bottom"         # process monitor
 	brew "diff-so-fancy"  # diff pager
-	brew "go"             # go
-	brew "node"           # node.js
 	brew "syncthing"      # multi machine file synchronization
 
 	cask "alacritty"                      # terminal emulator
 	cask "firefox-developer-edition"      # browser
-	cask "font-source-code-pro"           # main font
-	# nerd-font cannot be installed via homebrew yet
-	#cask "font-source-code-pro-nerd-font" # icon extension of the main font
+	cask "font-sauce-code-pro-nerd-font"  # main font
 EOF
 
 {{- end }}
