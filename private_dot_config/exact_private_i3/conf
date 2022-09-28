@@ -65,11 +65,11 @@ font xft:SourceCodePro Medium 11
 title_align center
 
 # Configure border style.
-new_window pixel 1
-new_float normal
+default_border pixel
+default_floating_border pixel
 
-# Hide borders.
-hide_edge_borders none
+# Hide edge borders.
+hide_edge_borders both
 
 # Focus under cursor.
 focus_follows_mouse no

@@ -10,9 +10,6 @@ window:
     x: 7
     y: 2
 
-  # Allow terminal applications to change Alacritty's window title.
-  dynamic_title: true
-
 scrolling:
    #Maximum number of lines in the scrollback buffer.
   history: 10000
