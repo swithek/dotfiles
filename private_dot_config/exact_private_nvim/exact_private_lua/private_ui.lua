@@ -10,6 +10,9 @@ vim.opt.showmode = false
 -- Make the cursor's shape static.
 vim.opt.guicursor = ""
 
+-- Disable mouse support.
+vim.opt.mouse = nil
+
 -- Show line numbers.
 vim.opt.number = true
 

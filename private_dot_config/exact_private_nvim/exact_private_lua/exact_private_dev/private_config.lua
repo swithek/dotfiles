@@ -15,6 +15,26 @@ require("lspconfig").gopls.setup {
 	capabilities = lsp_config.capabilities,
 }
 
+require("lspconfig").vuels.setup {
+	on_attach = lsp_config.on_attach,
+	capabilities = lsp_config.capabilities,
+	init_options = {
+		config = {
+			vetur = {
+				validation = {
+					script = false,
+					interpolation = false,
+				},
+			},
+		},
+	},
+}
+
+require("lspconfig").tsserver.setup {
+	on_attach = lsp_config.on_attach,
+	capabilities = lsp_config.capabilities,
+}
+
 -------------------
 -- vim-go
 -------------------
@@ -82,3 +102,11 @@ vim.api.nvim_create_autocmd({"FileType"}, {
 		vim.keymap.set("n", "<Leader>sf", ":GoFillStruct<CR>", opts)
 	end,
 })
+
+-------------------
+-- vim-prettier
+-------------------
+
+-- Enable autoformatting on save.
+vim.g["prettier#autoformat"] = 1
+vim.g["prettier#autoformat_require_pragma"] = 0

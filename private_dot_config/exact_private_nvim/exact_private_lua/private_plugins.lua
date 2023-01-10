@@ -65,6 +65,9 @@ require("mason").setup {
 -- mason-lspconfig
 -------------------
 
+-- available LSP servers:
+--  https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+--  https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local lsp_servers = { -- core servers
 	"sumneko_lua",
 }
@@ -197,6 +200,7 @@ require("lsp_signature").setup {
 -- nvim-treesitter
 -------------------
 
+-- available treesiter languages: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
 local treesitter_langs = { -- core languages
 	"comment",
 	"gitignore",
