@@ -69,7 +69,7 @@ require("mason").setup {
 --  https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 --  https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
 local lsp_servers = { -- core servers
-	"sumneko_lua",
+	"lua_ls",
 }
 
 for _, val in pairs(env_info) do
@@ -117,7 +117,7 @@ lsp_config.on_attach = function(_, bufnr)
 end
 
 -- Set up Lua's LSP server.
-require("lspconfig").sumneko_lua.setup {
+require("lspconfig").lua_ls.setup {
 	on_attach = lsp_config.on_attach,
 	capabilities = lsp_config.capabilities,
 	settings = {

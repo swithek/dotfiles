@@ -1,9 +1,9 @@
 [diff]
 pager = "diff-so-fancy"
 
-{{$env_type := promptStringOnce . "env_type" "What is the target environment type (full, dev, text)" -}}
-{{$git_global_name := promptStringOnce . "git_global_name" "What is the global git name (can be empty)" -}}
-{{$git_global_email := promptStringOnce . "git_global_email" "What is the global git email (can be empty)" -}}
+{{$env_type := promptStringOnce . "env_type" "What is the target environment type (full, dev, text)?" -}}
+{{$git_global_name := promptStringOnce . "git_global_name" "What is the global git name (can be empty)?" -}}
+{{$git_global_email := promptStringOnce . "git_global_email" "What is the global git email (can be empty)?" -}}
 [data]
 env_type = "{{ $env_type }}"
 git_global_name = "{{ $git_global_name }}"
