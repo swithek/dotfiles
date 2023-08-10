@@ -12,6 +12,8 @@ plug("fatih/vim-go", {
 })
 plug("prettier/vim-prettier", {
 	["do"] = "npm install",
+	-- markdown needs to be omitted
+	["for"] = {"javascript", "typescript", "css", "scss", "json", "vue", "yaml", "html"},
 })
 
 return {
