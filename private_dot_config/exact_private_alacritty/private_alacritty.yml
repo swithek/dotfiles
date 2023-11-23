@@ -11,29 +11,30 @@ window:
     y: 2
 
 scrolling:
-   #Maximum number of lines in the scrollback buffer.
-  history: 10000
+  #Maximum number of lines in the scrollback buffer.
+  history:
+    10000
 
-   #Scrolling distance multiplier.
+    #Scrolling distance multiplier.
   multiplier: 3
 
 font:
   # Normal (roman) font face.
   normal:
-    family: SauceCodePro Nerd Font
+    family: SauceCodePro NF
     style: Medium
 
   # Bold font face.
   bold:
-    family: SauceCodePro Nerd Font
+    family: SauceCodePro NF
 
   # Italic font face.
   italic:
-    family: SauceCodePro Nerd Font
+    family: SauceCodePro NF
 
   # Bold italic font face.
   bold_italic:
-    family: SauceCodePro Nerd Font
+    family: SauceCodePro NF
     style: Medium Italic
 
   # Point size.
@@ -52,47 +53,47 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors.
   primary:
-    background: '#1d2021'
-    foreground: '#fbf1c7'
-    dim_foreground: '#f2e5bc'
-    bright_foreground: '#f9f5d7'
+    background: "#1d2021"
+    foreground: "#fbf1c7"
+    dim_foreground: "#f2e5bc"
+    bright_foreground: "#f9f5d7"
 
   # Normal colors.
   normal:
-    black:   '#1d2021'
-    red:     '#cc241d'
-    green:   '#98971a'
-    yellow:  '#d79921'
-    blue:    '#458588'
-    magenta: '#b16286'
-    cyan:    '#689d6a'
-    white:   '#a89984'
+    black: "#1d2021"
+    red: "#cc241d"
+    green: "#98971a"
+    yellow: "#d79921"
+    blue: "#458588"
+    magenta: "#b16286"
+    cyan: "#689d6a"
+    white: "#a89984"
 
   # Bright colors.
   bright:
-    black:   '#928374'
-    red:     '#fb4934'
-    green:   '#b8bb26'
-    yellow:  '#fabd2f'
-    blue:    '#83a598'
-    magenta: '#d3869b'
-    cyan:    '#8ec07c'
-    white:   '#ebdbb2'
+    black: "#928374"
+    red: "#fb4934"
+    green: "#b8bb26"
+    yellow: "#fabd2f"
+    blue: "#83a598"
+    magenta: "#d3869b"
+    cyan: "#8ec07c"
+    white: "#ebdbb2"
 
   # Dim colors.
   dim:
-    black:   '#32302f'
-    red:     '#9d0006'
-    green:   '#79740e'
-    yellow:  '#b57614'
-    blue:    '#076678'
-    magenta: '#8f3f71'
-    cyan:    '#427b58'
-    white:   '#928374'
+    black: "#32302f"
+    red: "#9d0006"
+    green: "#79740e"
+    yellow: "#b57614"
+    blue: "#076678"
+    magenta: "#8f3f71"
+    cyan: "#427b58"
+    white: "#928374"
 
 selection:
   # Copy selected text to the primary clipboard.
-  save_to_clipboard: true 
+  save_to_clipboard: true
 
 cursor:
   # Cursor style.
@@ -106,11 +107,11 @@ cursor:
   # Cursor blinking interval in milliseconds.
   blink_interval: 550
 
-  # The cursor should be rendered as a hollow box when the window is 
+  # The cursor should be rendered as a hollow box when the window is
   # not focused.
   unfocused_hollow: true
 
-  # Thickness of the cursor relative to the cell width as floating point 
+  # Thickness of the cursor relative to the cell width as floating point
   # number from `0.0` to `1.0`.
   thickness: 0.1
 
