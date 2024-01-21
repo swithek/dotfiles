@@ -184,7 +184,7 @@ cmp.setup {
 -- cmp-nvim-lsp
 -------------------
 
-lsp_config.capabilities = require("cmp_nvim_lsp").update_capabilities(
+lsp_config.capabilities = require("cmp_nvim_lsp").default_capabilities(
 	vim.lsp.protocol.make_client_capabilities()
 )
 
@@ -256,7 +256,13 @@ vim.keymap.set("n", "<Leader>o", ":NERDTreeToggle<CR>", {
 -------------------
 
 require("gruvbox").setup {
-	italic = false,
+	italic = {
+		strings = false,
+		emphasis = false,
+		comments = false,
+		operators = false,
+		folds = false,
+	},
 	contrast = "hard",
 	overrides = {
 		SignColumn = { bg = "NONE" },
@@ -315,6 +321,4 @@ vim.keymap.set("n", "<Leader>x", ":Twilight<CR>", {
 -- indent-blankline
 -------------------
 
-require("indent_blankline").setup {
-	use_treesitter = true,
-}
+require("ibl").setup()
