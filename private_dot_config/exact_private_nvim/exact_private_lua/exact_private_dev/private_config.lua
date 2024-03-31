@@ -10,30 +10,92 @@
 
 local lsp_config = require("lsp_config")
 
-require("lspconfig").gopls.setup {
+require('lspconfig').gopls.setup({
 	on_attach = lsp_config.on_attach,
 	capabilities = lsp_config.capabilities,
-}
+})
 
-require("lspconfig").vuels.setup {
+require('lspconfig').volar.setup({
 	on_attach = lsp_config.on_attach,
 	capabilities = lsp_config.capabilities,
-	init_options = {
-		config = {
-			vetur = {
-				validation = {
-					script = false,
-					interpolation = false,
-				},
-			},
+})
+
+-- though this isn't part of lspconfig, it still works as an extension
+-- to it.
+require("typescript-tools").setup({
+	on_attach = function(client, bufnr)
+		lsp_config.on_attach(client, bufnr)
+
+		-- we need to disable this because of this bug:
+		-- https://github.com/pmizio/typescript-tools.nvim/issues/250
+		client.server_capabilities.semanticTokensProvider = false
+	end,
+	capabilities = lsp_config.capabilities,
+	filetypes = {
+		"javascript",
+		"typescript",
+		"vue",
+	},
+	settings = {
+		tsserver_plugins = {
+			"@vue/typescript-plugin",
+		},
+		separate_diagnostic_server = true,
+		publish_diagnostic_on = "change",
+		expose_as_code_action = "all",
+		include_completions_with_insert_text = true,
+		tsserver_format_options = {
+			insertSpaceAfterCommaDelimiter = true,
+			insertSpaceAfterSemicolonInForStatements = true,
+			insertSpaceAfterConstructor = true,
+			insertSpaceAfterKeywordsInControlFlowStatements = true,
+			placeOpenBraceOnNewLineForFunctions = true,
+			placeOpenBraceOnNewLineForControlBlocks = true,
+			semicolons = "remove",
+		},
+		tsserver_file_preferences = {
+			quotePreference = "double",
+			includeCompletionsForModuleExports = true,
+			includeCompletionsForImportStatements = true,
+			includeAutomaticOptionalChainCompletions = true,
+			useLabelDetailsInCompletionEntries = true,
+			allowIncompleteCompletions = true,
+			importModuleSpecifierPreference = "project-relative",
+			importModuleSpecifierEnding = "minimal",
+			allowTextChangesInNewFiles = true,
+			providePrefixAndSuffixTextForRename = true,
+			provideRefactorNotApplicableReason = true,
+			allowRenameOfImportPath = true,
+			includePackageJsonAutoImports = "auto",
+			includeInlayParameterNameHints = "all",
+			includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+			includeInlayFunctionParameterTypeHints = true,
+			includeInlayVariableTypeHints = true,
+			includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+			includeInlayPropertyDeclarationTypeHints = true,
+			includeInlayFunctionLikeReturnTypeHints = true,
+			includeInlayEnumMemberValueHints = true,
+			organizeImportsIgnoreCase = true,
 		},
 	},
-}
+})
 
-require("lspconfig").tsserver.setup {
-	on_attach = lsp_config.on_attach,
-	capabilities = lsp_config.capabilities,
-}
+local function setupTSFormatting()
+	local tsTools = require("typescript-tools.api")
+	vim.api.nvim_create_autocmd({"BufWritePre"}, {
+		group = vim.api.nvim_create_augroup("typescript_format_on_save", {}),
+		pattern = { -- need to specify file extensions here
+			"*.js",
+			"*.ts",
+			"*.vue",
+		},
+		callback = function ()
+			tsTools.add_missing_imports(true)
+			tsTools.organize_imports(true)
+			tsTools.fix_all(true)
+		end,
+	})
+end
 
 -------------------
 -- vim-go
@@ -46,7 +108,7 @@ vim.g.go_code_completion_enabled = 0
 vim.g.go_test_show_name = 1
 
 -- Set test timeout.
-vim.g.go_test_timeout = "20s"
+vim.g.go_test_timeout = "1m"
 
 -- Do not jump to the first error when building/testing, etc.
 vim.g.go_jump_to_error = 0
@@ -110,3 +172,28 @@ vim.api.nvim_create_autocmd({"FileType"}, {
 -- Enable autoformatting on save.
 vim.g["prettier#autoformat"] = 0
 vim.g["prettier#autoformat_require_pragma"] = 0
+
+-------------------
+-- General UI Configuration
+-------------------
+
+local ui = require("ui")
+vim.api.nvim_create_autocmd({"FileType"}, {
+	group = vim.api.nvim_create_augroup("small_tabs", {}),
+	pattern = {
+		"javascript",
+		"typescript",
+		"css",
+		"scss",
+		"vue",
+		"html",
+		"json",
+		"yaml",
+		"toml",
+		"markdown",
+	},
+	callback = function ()
+		ui.use_tabs(false, 2)
+		setupTSFormatting()
+	end,
+})

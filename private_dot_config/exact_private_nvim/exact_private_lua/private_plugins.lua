@@ -71,20 +71,25 @@ require("mason").setup {
 local lsp_servers = { -- core servers
 	"lua_ls",
 }
+local lsp_handlers = {}
 
 for _, val in pairs(env_info) do
-	local extras = val.lsp_servers
-
-	for j = 1, #extras do
-		if not vim.tbl_contains(lsp_servers, extras[j]) then
-			table.insert(lsp_servers, extras[j])
+	local extraServers = val.lsp_servers
+	for j = 1, #extraServers do
+		if not vim.tbl_contains(lsp_servers, extraServers[j]) then
+			table.insert(lsp_servers, extraServers[j])
 		end
+	end
+
+	for name, fn in pairs(val.lsp_handlers) do
+		lsp_handlers[name] = fn
 	end
 end
 
 require("mason-lspconfig").setup {
 	ensure_installed = lsp_servers,
 	automatic_installation = true,
+	handlers = lsp_handlers,
 }
 
 -------------------

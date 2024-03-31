@@ -94,7 +94,7 @@ local function use_tabs(spaces, size)
 	vim.opt.softtabstop = size
 end
 
-use_tabs(false, 8) -- enable tabs
+use_tabs(false, 8) -- enable tabs (default)
 
 -- Create a command to update tab indentation options.
 vim.api.nvim_create_user_command("UseTabs",
@@ -151,3 +151,7 @@ vim.keymap.set("n", "<Leader>dq", function()
 
 	diagnostics_active = not diagnostics_active
 end)
+
+return {
+	use_tabs = use_tabs,
+}

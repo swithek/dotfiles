@@ -15,4 +15,5 @@
 return {
 	treesitter_langs = {},
 	lsp_servers = {},
+	lsp_handlers = {},
 }

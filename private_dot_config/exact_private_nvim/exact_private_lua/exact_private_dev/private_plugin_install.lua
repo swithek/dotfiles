@@ -12,9 +12,21 @@ plug("fatih/vim-go", {
 })
 plug("prettier/vim-prettier", {
 	["do"] = "npm install",
-	-- markdown needs to be omitted
-	["for"] = {"javascript", "typescript", "css", "scss", "json", "vue", "yaml", "html"},
+	["for"] = {
+		"javascript",
+		"typescript",
+		"css",
+		"scss",
+		"vue",
+		"html",
+		"json",
+		"yaml",
+		"toml",
+		"markdown",
+	},
 })
+plug("nvim-lua/plenary.nvim") -- used by typescript-tools
+plug("pmizio/typescript-tools.nvim")
 
 return {
 	treesitter_langs = {
@@ -39,7 +51,7 @@ return {
 	},
 	lsp_servers = {
 		"gopls",    -- go
-		"vuels",    -- vue: replace with volar when it stops crashing
-		"tsserver", -- typescript
+		"volar",    -- vue
 	},
+	lsp_handlers = {},
 }
