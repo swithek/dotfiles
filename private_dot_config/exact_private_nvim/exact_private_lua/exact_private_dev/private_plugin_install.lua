@@ -48,10 +48,12 @@ return {
 		"sql",
 		"typescript",
 		"vue",
+		"astro",
 	},
 	lsp_servers = {
-		"gopls",    -- go
-		"volar",    -- vue
+		"gopls",  -- go
+		"volar",  -- vue
+		"astro",  -- astro
 	},
 	lsp_handlers = {},
 }
