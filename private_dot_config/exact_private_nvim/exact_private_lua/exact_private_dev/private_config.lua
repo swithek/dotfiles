@@ -20,6 +20,11 @@ require('lspconfig').volar.setup({
 	capabilities = lsp_config.capabilities,
 })
 
+require('lspconfig').astro.setup({
+	on_attach = lsp_config.on_attach,
+	capabilities = lsp_config.capabilities,
+})
+
 -- though this isn't part of lspconfig, it still works as an extension
 -- to it.
 require("typescript-tools").setup({
@@ -191,6 +196,7 @@ vim.api.nvim_create_autocmd({"FileType"}, {
 		"yaml",
 		"toml",
 		"markdown",
+		"astro",
 	},
 	callback = function ()
 		ui.use_tabs(false, 2)
