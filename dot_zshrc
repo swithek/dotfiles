@@ -1,0 +1,10 @@
+export GOPATH=$HOME/.go
+export VISUAL=/opt/homebrew/bin/nvim
+export EDITOR=/opt/homebrew/bin/nvim
+export PATH=$PATH:$GOPATH/bin
+
+eval "$(fnm env --use-on-cd --shell zsh)"
+eval "$(starship init zsh)"
+
+# remove .DS_Store files recursively in the current directory
+alias rmds="find . -name ".DS_Store" -delete"

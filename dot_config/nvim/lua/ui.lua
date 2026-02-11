@@ -34,7 +34,7 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.cursorline = true
 
 -- Show the recommended line length.
-vim.opt.colorcolumn = "79"
+vim.opt.colorcolumn = "80"
 
 -- Extend regular expressions.
 vim.opt.magic = true
@@ -58,29 +58,9 @@ vim.opt.smartcase = true
 -- Apply substitutions on all lines.
 vim.opt.gdefault = true
 
--- toggle_lights changes the colour mode (dark/light) of all visual
--- components of the editor.
-local function toggle_lights()
-	local initial = vim.fn.empty(vim.g.colors_name) > 0
-
-	if vim.opt.background:get() == "dark" and not initial then
-		vim.opt.background = "light"
-	else
-		vim.opt.background = "dark"
-	end
-
-	vim.cmd("colorscheme gruvbox")
-end
-
-if vim.fn.empty(vim.g.colors_name) > 0 then
-	toggle_lights() -- enable the default (dark) mode
-end
-
--- Create a command to toggle between dark/light colour modes.
-vim.api.nvim_create_user_command("ToggleLights", toggle_lights, {})
-
--- Toggle between dark/light colour modes.
-vim.keymap.set("n", "<Leader>m", toggle_lights)
+-- Activate the main colour scheme.
+vim.cmd("colorscheme catppuccin")
+vim.opt.background = "dark"
 
 -- use_tabs updates tab-related options.
 local function use_tabs(spaces, size)
@@ -152,6 +132,23 @@ vim.keymap.set("n", "<Leader>dq", function()
 	diagnostics_active = not diagnostics_active
 end)
 
-return {
-	use_tabs = use_tabs,
-}
+-- Adjust tabs according to the file type.
+vim.api.nvim_create_autocmd({"FileType"}, {
+	group = vim.api.nvim_create_augroup("small_tabs", {}),
+	pattern = {
+		"javascript",
+		"typescript",
+		"css",
+		"scss",
+		"vue",
+		"html",
+		"json",
+		"yaml",
+		"toml",
+		"markdown",
+		"astro",
+	},
+	callback = function ()
+		use_tabs(false, 2)
+	end,
+})
