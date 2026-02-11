@@ -13,3 +13,4 @@ macos-window-buttons = hidden
 macos-auto-secure-input = true
 window-save-state = always
 quit-after-last-window-closed = true
+term = xterm-256color

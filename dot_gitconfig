@@ -20,3 +20,5 @@
 
 [diff-so-fancy]
 	markEmptyLines = false
+[url "git@github.com:"]
+	insteadOf = https://github.com/
