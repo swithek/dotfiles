@@ -6,5 +6,10 @@ export PATH=$PATH:$GOPATH/bin
 eval "$(fnm env --use-on-cd --shell zsh)"
 eval "$(starship init zsh)"
 
+autoload -U compinit && compinit
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+
 # remove .DS_Store files recursively in the current directory
 alias rmds="find . -name ".DS_Store" -delete"
